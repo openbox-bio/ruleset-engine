@@ -1,0 +1,20 @@
+column names in ['value1', 'value2', 'value3']
+
+column: 'value1'
+is in ['HiRes', 'LowRes', 'NoRes']
+
+column: 'value2'
+has value type floating point
+
+column: 'value3'
+has value type floating point
+
+'HiRes Rule'
+if column: 'value1' is 'HiRes'
+then 
+column: 'value2'
+set tolerance at 0.0000001
+is == 20.0
+column: 'value3'
+set tolerance at 0.01
+is == 5

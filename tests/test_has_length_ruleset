@@ -1,0 +1,23 @@
+column names in ['value1','value2','value3','value4', 'value5', 'value6', 'value7']
+all columns required
+
+column: 'value1' 
+has length 11
+
+column: 'value2' 
+has length 2
+
+column: 'value3' 
+has length 4
+
+column: 'value4' 
+has length 5
+
+column: 'value5' 
+has length 9
+
+column: 'value6' 
+has length 4
+
+column: 'value7' 
+has length 10

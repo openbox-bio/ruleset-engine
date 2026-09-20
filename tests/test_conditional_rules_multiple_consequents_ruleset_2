@@ -1,0 +1,18 @@
+allowed null values in ['Not Collected', 'Not Measured']
+column names in ['value1', 'value2']
+
+column: 'value1'
+is in ['IsNull', 'IsNotNull']
+
+
+'IsNull Rule'
+if column: 'value1' is 'IsNull'
+then 
+column: 'value2' is null
+column: 'value3' is null
+
+'IsNotNull Rule'
+if column: 'value1' is 'IsNotNull'
+then 
+column: 'value2'
+is not null

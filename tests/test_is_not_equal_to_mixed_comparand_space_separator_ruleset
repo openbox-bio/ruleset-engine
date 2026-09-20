@@ -1,0 +1,10 @@
+allowed null values in ['Not Collected']
+thousands separator is ' '
+
+column names in ['value1', 'value2']
+
+column: 'value1'
+is != 10000
+
+column: 'value2'
+is != 2012345.00

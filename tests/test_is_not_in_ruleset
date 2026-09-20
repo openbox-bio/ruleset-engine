@@ -1,0 +1,9 @@
+allowed null values in ['Not Collected']
+
+column names in ['value1', 'value2']
+
+column: 'value1'
+is not in ['Paris', 'London', 'Bonn']
+
+column: 'value2'
+is not in ['Saigon', 'Yangon', 'Kuala Lumpur', 'Canberra']

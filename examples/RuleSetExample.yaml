@@ -1,0 +1,107 @@
+###############################################################################
+# Set global values for parsing, formatting, and null detection.
+###############################################################################
+set_values:
+  - set_locale: 'US'
+  - null_values:
+    - 'Not Reported'
+    - 'Not Collected'
+  - set_thousands_separator: ','
+  - set_precision: 2
+
+###############################################################################
+# Define expectations for column structure: names, requiredness, order, etc.
+###############################################################################
+column_rules:
+  - column_names:
+    - 'Patient ID'
+    - 'First Name'
+    - 'Last Name'
+    - 'Date of Birth'
+    - 'Gender'
+    - 'Visit Date'
+    - 'Height (cm)'
+    - 'Weight (kg)'
+    - 'Country Code'
+  - all_columns_required: true
+  - no_extra_columns_allowed: true
+  - check_column_order: true
+
+###############################################################################
+# Apply shared rules to groups of columns.
+###############################################################################
+block_rules:
+  - columns: ['First Name', 'Last Name']
+    rules:
+    - value_type: string
+    - required: true
+    - min_length: 1
+    - max_length: 50
+
+  - columns: ['Height (cm)', 'Weight (kg)']
+    rules:
+    - value_type: number
+    - required: true
+    - gte: 0
+    - lte: 300
+
+###############################################################################
+# Rules applied to individual columns.
+###############################################################################
+value_rules:
+  - column: 'Patient ID'
+    rules:
+    - value_type: string
+    - required: true
+    - unique: true
+    - pattern: '^PT[0-9]{5}$'
+
+  - column: 'Date of Birth'
+    rules:
+    - value_type: date
+    - format: 'YYYY-MM-DD'
+    - required: true
+    - lt: '2020-01-01'
+
+  - column: 'Gender'
+    rules:
+    - value_type: string
+    - in: ['Male', 'Female', 'Other']
+    - required: true
+
+  - column: 'Visit Date'
+    rules:
+    - value_type: date
+    - format: 'YYYY-MM-DD'
+    - gte: '2023-01-01'
+    - lte: '2025-12-31'
+
+  - column: 'Country Code'
+    rules:
+    - value_type: string
+    - in: ['US', 'CA', 'UK', 'AU']
+    - not_in: ['XX', 'ZZ']
+    - length: 2
+    - required: true
+
+###############################################################################
+# Conditional logic for dependent rules.
+###############################################################################
+conditional_rules:
+  if:
+  - column: 'Country Code'
+    rule:
+    - in: ['US', 'CA']
+  then:
+  - column: 'Zip Code'
+    rule:
+    - pattern: '^[0-9]{5}$'
+
+  if:
+  - column: 'Weight (kg)'
+    rule:
+    - gt: 100
+  then:
+  - column: 'Height (cm)'
+    rule:
+    - gte: 160

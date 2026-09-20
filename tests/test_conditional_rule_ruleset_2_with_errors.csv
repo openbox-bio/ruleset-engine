@@ -1,0 +1,7 @@
+value1,value2,value3
+IsNull,25,Tom Jones
+IsNull,Not Collected,35
+IsNull,TomJones, Not Collected
+IsNotNull,,
+IsNotNull,Not Measured,3.5
+IsNotNull,8.2,Not Collected

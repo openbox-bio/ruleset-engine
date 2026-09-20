@@ -1,0 +1,11 @@
+set tolerance at '1E-05'
+allowed null values in ['Not Collected']
+column names in ['value1', 'value2']
+
+//For column: value1
+column: 'value1'
+is >= 1E+6
+
+//For column: value2
+column: 'value2'
+is > -2E+6

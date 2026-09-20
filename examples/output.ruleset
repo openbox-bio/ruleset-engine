@@ -1,0 +1,35 @@
+set locale "US"
+allowed null values in ['Not Reported', 'Not Collected']
+thousands separator is ","
+set precision at 4
+
+column names in ['ID', 'First Name', 'Last Name', 'Year of Birth', 'Country']  
+all columns required  
+no extra columns allowed  
+check column order  
+
+ruleblock: ['ID', 'First Name', 'Last Name']
+has value type string
+is required
+starts with "PSA"
+
+ruleblock: ['Age', 'Height', 'Weight']
+has value type number
+is required
+is >= 0
+
+column: "ID"
+has value type string
+is unique
+is required
+starts with "PSA"
+
+column: "Name"
+has value type string
+
+column: "Year"
+has value type date-time
+has format YYYY
+
+column: "Country"
+is in ['EGY', 'IND']

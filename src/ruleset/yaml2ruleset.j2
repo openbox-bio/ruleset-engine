@@ -1,0 +1,126 @@
+
+{% from "yaml2atomicrules_macro.j2" import yaml2atomicrules %}
+{###########################################################
+The following block converts YAML to RuleSet for
+the "set value" rules. All set value rules are optional.
+Example syntax in YAML:
+set_values:
+  -set_locale: 'US'
+  -null_values: 
+    - 'Not Reported'
+    - 'Not Collected'
+  -set_thousands_separator: ','
+  -set_precision: 4
+###########################################################}
+{% for item in set_values %}
+  {%- if item.set_locale is defined %}
+set locale "{{ item.set_locale }}"
+  {%- endif %}
+
+  {%- if item.null_values is defined %}
+allowed null values in {{ item.null_values }}
+  {%- endif %}
+
+  {%- if item.set_thousands_separator is defined %}
+thousands separator is "{{ item.set_thousands_separator }}"
+  {%- endif %}
+
+  {%- if item.set_precision is defined %}
+set precision at {{ item.set_precision }}
+  {%- endif %}
+
+{% endfor %}
+
+{###########################################################
+The following block converts YAML to RuleSet for
+the "column" rules. Only the column names rule is 
+required; all other rules are optional.
+Example syntax in YAML:
+column_rules:
+  - column_names: 
+    - 'ID'
+    - 'First Name'
+    - 'Last Name'
+    - 'Year of Birth'
+    - 'Country'
+  - all_columns_required: true
+  - no_extra_columns_allowed: true
+  - check_column_order: true
+###########################################################}
+{% for item in column_rules %}
+  {%- if item.column_names is defined %}
+column names in {{ item.column_names }}
+  {%- endif %}
+
+  {%- if item.all_columns_required is defined %}
+all columns required
+  {%- endif %}
+
+  {%- if item.no_extra_columns_allowed is defined %}
+no extra columns allowed
+  {%- endif %}
+
+  {%- if item.check_column_order is defined %}
+check column order
+  {%- endif %}
+  
+{% endfor %}
+
+{###########################################################
+The following block converts YAML to RuleSet for
+the "block" rules.               
+Example syntax in YAML:
+block_rules:
+  - columns:
+    - 'ID'
+    - 'First Name'
+    - 'Last Name'
+    rules:
+      - value type string
+      - required: true
+      - starts_with: 'PSA'
+  - columns:
+    - 'Age'
+    - 'Height'
+    - 'Weight'
+    rules: 
+      - value_type: number
+      - required: 'true'
+      - gte: 0
+###########################################################}
+{% for block in block_rules %}
+ruleblock: {{ block.columns }}
+{% for rule in block.rules %}
+{{ yaml2atomicrules(rule) }}
+{% endfor %}
+
+{% endfor %}
+{###########################################################
+The following block converts YAML to RuleSet for
+the "value" rules. This is an optional block.
+Example syntax in YAML:
+value_rules:
+  - column: 'ID'
+    rules:
+    - value_type: string
+    - unique: true
+    - required: true
+    - startswith: 'PSA'
+  - column: 'Name'
+    rules:
+    - value_type: string
+  - column: 'Year'
+    rules:
+    - value_type: date-time
+    - format: 'YYYY'
+  - column: 'Country'
+    rules:
+    - in: ['EGY', 'IND']
+###########################################################}
+{% for col in value_rules %}
+column: "{{ col.column }}"
+{% for rule in col.rules %}
+{{ yaml2atomicrules(rule) }}
+{% endfor %}
+
+{% endfor %}

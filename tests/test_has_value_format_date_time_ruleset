@@ -1,0 +1,74 @@
+column names in ['value1','value2','value3','value4','value5','value6','value7','value8','value9','value10','value11','value12','value13','value14','value15','value16','value17','value18','value19','value20','value21','value22','value23','value24']
+
+column: 'value1'
+has format YYYY-MM-DD
+
+column: 'value2'
+has format MM-DD-YYYY
+
+column: 'value3'
+has format DD-MM-YYYY
+
+column: 'value4'
+has format YYYY/MM/DD
+
+column: 'value5'
+has format MM/DD/YYYY
+
+column: 'value6'
+has format DD/MM/YYYY
+
+column: 'value7'
+has format YYYY.MM.DD
+
+column: 'value8'
+has format MM.DD.YYYY
+
+column: 'value9'
+has format DD.MM.YYYY
+
+column: 'value10'
+has format YYYYMMDD
+
+column: 'value11'
+has format HH:mm:ss
+
+column: 'value12'
+has format HH:mm
+
+column: 'value13'
+has format hh:mm:ss AM/PM
+
+column: 'value14'
+has format hh:mm AM/PM
+
+column: 'value15'
+has format HHmmss
+
+column: 'value16'
+has format YYYY-MM-DD HH:mm:ss
+
+column: 'value17'
+has format YYYY-MM-DDTHH:mm:ss
+
+column: 'value18'
+has format YYYY-MM-DD HH:mm
+
+column: 'value19'
+has format YYYY-MM-DDTHH:mm
+
+column: 'value20'
+has format DD/MM/YYYY HH:mm:ss
+
+column: 'value21'
+has format MM-DD-YYYY hh:mm:ss AM/PM
+
+column: 'value22'
+has format YYYY/MM/DD HH:mm:ss
+
+column: 'value23'
+has format YYYY-MM-DDTHH:mm:ss.sssZ
+
+column: 'value24'
+has format YYYY-MM-DDTHH:mm:ss+hh:mm
+    

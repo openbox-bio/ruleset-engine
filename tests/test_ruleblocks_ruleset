@@ -1,0 +1,14 @@
+//run this ruleset with ruleset-engine.py.
+column names in ['value1', 'value2', 'value3', 'value4', 'value5']
+
+ruleblock: ['value1', 'value2', 'value3']
+set tolerance at 0.0001
+has value type integer
+
+
+ruleblock: ['value4','value5']
+has value type string
+
+column: 'value1'
+is > 20.0
+is unique

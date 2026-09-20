@@ -1,0 +1,11 @@
+set tolerance at '0.00001'
+allowed null values in ['Not Collected']
+column names in ['value1', 'value2']
+
+//For column: value1
+column: 'value1'
+is >= 10.0
+
+//For column: value2
+column: 'value2'
+is >= 20.00002

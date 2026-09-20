@@ -1,0 +1,86 @@
+{% macro yaml2atomicrules(rule) %}
+{%- if rule.value_type is defined %}
+has value type {{ rule.value_type }}
+{%- endif %}
+{%- if rule.format is defined %}
+has format {{ rule.format }}
+{%- endif %}
+{%- if rule.unique is defined %}
+is unique
+{%- endif %}
+{%- if rule.required is defined %}
+is required
+{%- endif %}
+{%- if rule.is_null is defined %}
+is null
+{%- endif %}
+{%- if rule.not_null is defined %}
+is not null
+{%- endif %}
+{%- if rule.pattern is defined %}
+has pattern {{ rule.pattern }}
+{%- endif %}
+{%- if rule.in is defined %}
+is in {{ rule.in }}
+{%- endif %}
+{%- if rule.not_in is defined %}
+is not in {{ rule.not_in }}
+{%- endif %}
+{%- if rule.in_file is defined %}
+is in file {{ rule.in_file }}
+{%- endif %}
+{%- if rule.not_in_file is defined %}
+is not in file {{ rule.not_in_file }}
+{%- endif %}
+{%- if rule.equals is defined %}
+is "{{ rule.equals }}"
+{%- endif %}
+{%- if rule.not_equals is defined %}
+is not "{{ rule.not_equals }}"
+{%- endif %}
+{%- if rule.eq is defined %}
+is == {{ rule.eq }}
+{%- endif %}
+{%- if rule.neq is defined %}
+is != {{ rule.neq }}
+{%- endif %}
+{%- if rule.gt is defined %}
+is > {{ rule.gt }}
+{%- endif %}
+{%- if rule.lt is defined %}
+is < {{ rule.lt }}
+{%- endif %}
+{%- if rule.gte is defined %}
+is >= {{ rule.gte }}
+{%- endif %}
+{%- if rule.lte is defined %}
+is <= {{ rule.lte }}
+{%- endif %}
+{%- if rule.length is defined %}
+has length {{ rule.length }}
+{%- endif %}
+{%- if rule.min_length is defined %}
+has min length {{ rule.min_length }}
+{%- endif %}
+{%- if rule.max_length is defined %}
+has max length {{ rule.max_length }}
+{%- endif %}
+{%- if rule.starts_with is defined %}
+starts with "{{ rule.starts_with }}"
+{%- endif %}
+{%- if rule.ends_with is defined %}
+ends with "{{ rule.ends_with }}"
+{%- endif %}
+{%- if rule.includes is defined %}
+includes "{{ rule.includes }}"
+{%- endif %}
+{%- if rule.not_includes is defined %}
+does not include "{{ rule.not_includes }}"
+{%- endif %}
+{%- if rule.significant_digits is defined %}
+has {{ rule.significant_digits }} significant digits
+{%- endif %}
+{%- if rule.decimal_places is defined %}
+has {{ rule.decimal_places }} decimal places
+{%- endif %}
+{% endmacro %}

@@ -1,0 +1,8 @@
+column names in ['value1', 'value2']
+all columns required
+
+column: 'value1' 
+has 1 decimal place
+
+column: 'value2'
+has 2 decimal places

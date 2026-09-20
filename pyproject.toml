@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ruleset-engine"
+version = "0.1.0"
+description = "textX language project for the RuleSet data validation DSL"
+requires-python = ">=3.8"
+dependencies = ["textX"]
+
+[project.entry-points.textx_languages]
+ruleset = "ruleset.metamodel:ruleset_lang"
+
+[tool.setuptools.package-data]
+ruleset = ["Ruleset.tx"]

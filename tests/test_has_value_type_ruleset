@@ -1,0 +1,23 @@
+column names in ['value1','value2','value3','value4', 'value5', 'value6', 'value7']
+all columns required
+
+column: 'value1' 
+has value type string
+
+column: 'value2' 
+has value type integer
+
+column: 'value3' 
+has value type floating point
+
+column: 'value4' 
+has value type boolean
+
+column: 'value5' 
+has value type scientific
+
+column: 'value6' 
+has value type complex
+
+column: 'value7' 
+has value type date-time

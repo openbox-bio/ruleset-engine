@@ -1,0 +1,8 @@
+column names in ['value1', 'value2']
+all columns required
+
+column: 'value1' 
+includes 'OM'
+
+column: 'value2'
+includes 2

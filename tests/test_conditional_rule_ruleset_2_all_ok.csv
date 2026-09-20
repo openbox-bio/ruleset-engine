@@ -1,0 +1,7 @@
+value1,value2,value3
+IsNull,Not Measured,
+IsNull,Not Collected,
+IsNull,,Not Collected
+IsNotNull,3.5,A
+IsNotNull,ABC,3.55
+IsNotNull,12/24/2026,8.2

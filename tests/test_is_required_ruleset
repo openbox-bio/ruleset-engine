@@ -1,0 +1,24 @@
+allowed null values in ['Not Collected']
+
+column names in ['value1','value2','value3','value4', 'value5', 'value6', 'value7']
+
+column: 'value1'
+is required
+
+column: 'value2'
+is required
+
+column: 'value3'
+is required
+
+column: 'value4'
+is required
+
+column: 'value5'
+is required
+
+column: 'value6'
+is required
+
+column: 'value7'
+is required

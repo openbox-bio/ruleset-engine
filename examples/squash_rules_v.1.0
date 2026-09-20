@@ -1,0 +1,31 @@
+//Rules to validate squash_playsers.csv
+//These rules specify value type for each column.
+//-------------------------------------
+
+column names in ['Rank', 'PSA_ID', 'First_Name', 'Last_Name', 'Country', 'Year_of_Birth', 'Address', 'Zip_Code']
+all columns required
+no extra columns allowed
+
+column: 'Rank'
+has value type integer
+
+column: 'PSA_ID'
+has value type string
+
+column: 'First_Name'
+has value type string
+
+column: 'Last_Name'
+has value type string
+
+column: 'Country'
+has value type string
+
+column: 'Year_of_Birth'
+has value type date-time
+
+column: 'Address'
+has value type string
+
+column: 'Zip_Code'
+is not null

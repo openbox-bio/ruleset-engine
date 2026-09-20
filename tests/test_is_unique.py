@@ -1,0 +1,102 @@
+import sys
+sys.path.insert(0, "/home/anjan_purkayastha/Documents/openboxbio/20211227_dsl-for-data-validation/code/ruleset_engine/")
+
+import unittest
+from textx import get_location, TextXSyntaxError
+from textx.metamodel import metamodel_from_file
+import sys
+import pandas as pd
+from pandas._libs.parsers import STR_NA_VALUES
+from ruleset import in_column_value_rules as i
+
+class TestIsUnique(unittest.TestCase):
+	def test_is_unique_all_ok(self):
+		'''
+		Tests that is_unique function returns All OK, with a sheet with no replicate values.
+		'''
+		rules_infile = "test_is_unique_ruleset"
+		data_infile = "test_is_unique_all_ok.csv"
+		'''
+		Read the Ruleset metamodel from metamodel file.
+		Read the rules file.
+		'''
+		metamodel_infile = "../ruleset/RuleSet.tx"
+		mm = metamodel_from_file(metamodel_infile, autokwd=True)
+		try:
+			demo_rules = mm.model_from_file(rules_infile)
+		except TextXSyntaxError as err:
+			print(f'Syntax Error found in {err.filename} in line {err.line}, column {err.col}')
+			print(f'Error: {err.message}')
+		'''
+		Create a dictionary of column rules and of column value rules from the parsed rules file.
+		Key = rule name; Value = rule object. 
+		'''
+		set_value_rules_dict = {}
+		column_rules_dict = {}
+		column_value_rules_dict = {}
+		# add a list of cross-column conditional rules.
+
+		for rule in demo_rules.set_value_rules:
+			set_value_rules_dict[type(rule).__name__] = rule
+
+		for rule in demo_rules.column_rules:
+			column_rules_dict[type(rule).__name__] = rule
+
+		for rule in demo_rules.column_value_rules:
+			column_value_rules_dict[rule.column_name.name] = rule
+
+		demo_df = pd.read_csv(data_infile, dtype = object, na_values = STR_NA_VALUES)
+		for column_name in column_value_rules_dict.keys():
+			value_rules_list = column_value_rules_dict[column_name].valuerules
+			for value_rule in value_rules_list:
+				value_rule_name = type(value_rule).__name__
+				if i.in_column_value_rule_checker_dict[value_rule_name]:
+					return_val = i.in_column_value_rule_checker_dict[value_rule_name](df = demo_df, input_rule = value_rule, input_column_name = column_name, input_set_value_rules = set_value_rules_dict, input_column_rules = column_rules_dict, input_column_value_rules = column_value_rules_dict)
+					self.assertEqual(return_val[0], [True, True, True])
+
+	def test_is_unique_with_errors(self):
+		'''
+		Tests that is_unique function recognizes columns with replicated values.
+		'''
+		rules_infile = "test_is_unique_ruleset"
+		data_infile = "test_is_unique_with_errors.csv"
+		'''
+		Read the Ruleset metamodel from metamodel file.
+		Read the rules file.
+		'''
+		metamodel_infile = "../ruleset/RuleSet.tx"
+		mm = metamodel_from_file(metamodel_infile, autokwd=True)
+		try:
+			demo_rules = mm.model_from_file(rules_infile)
+		except TextXSyntaxError as err:
+			print(f'Syntax Error found in {err.filename} in line {err.line}, column {err.col}')
+			print(f'Error: {err.message}')
+		'''
+		Create a dictionary of column rules and of column value rules from the parsed rules file.
+		Key = rule name; Value = rule object. 
+		'''
+		set_value_rules_dict = {}
+		column_rules_dict = {}
+		column_value_rules_dict = {}
+		# add a list of cross-column conditional rules.
+
+		for rule in demo_rules.set_value_rules:
+			set_value_rules_dict[type(rule).__name__] = rule
+
+		for rule in demo_rules.column_rules:
+			column_rules_dict[type(rule).__name__] = rule
+
+		for rule in demo_rules.column_value_rules:
+			column_value_rules_dict[rule.column_name.name] = rule
+
+		demo_df = pd.read_csv(data_infile, dtype = object, na_values = STR_NA_VALUES)
+		for column_name in column_value_rules_dict.keys():
+			value_rules_list = column_value_rules_dict[column_name].valuerules
+			for value_rule in value_rules_list:
+				value_rule_name = type(value_rule).__name__
+				if i.in_column_value_rule_checker_dict[value_rule_name]:
+					return_val = i.in_column_value_rule_checker_dict[value_rule_name](df = demo_df, input_rule = value_rule, input_column_name = column_name, input_set_value_rules = set_value_rules_dict, input_column_rules = column_rules_dict, input_column_value_rules = column_value_rules_dict)
+					self.assertEqual(return_val[0], [False, False, False])
+
+if __name__ == '__main__':
+	unittest.main()

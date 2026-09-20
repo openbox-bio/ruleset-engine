@@ -1,0 +1,296 @@
+//Rule Document
+RuleSet:
+set_value_rules *= SetValueRule
+column_rules += ColumnRule
+block_rules *= BlockInColumnValueRule
+column_value_rules *= InColumnValueRule
+conditional_rules *= ConditionalRule
+;
+
+//Rule Document
+SetValueRule:
+SetNullValuesRule | SetLocaleRule | ThousandsSeparatorRule | SetGlobalToleranceRule | IgnoreNullWarningsRule
+;
+
+//Rule Document
+SetNullValuesRule:
+'allowed null values in '  '[' allowed_null_values_list +=  Value[','] ']'
+;
+
+//Rule Document
+//**NOT CODED FOR NOW**
+SetLocaleRule:
+'set locale as ' set_locale_input = STRING
+;
+
+//Rule Document
+ThousandsSeparatorRule:
+'thousands separator is ' separator_input = STRING
+;
+//Rule Document
+SetGlobalToleranceRule:
+'set tolerance at ' global_tolerance_input = Value
+;
+
+//Rule Document
+IgnoreNullWarningsRule:
+'ignore null warnings'
+;
+
+//Rule Document
+ColumnRule: 
+ColumnListRule | RequiredColumnsRule | ExtraColumnsRule | ColumnOrderRule
+;
+
+//Rule Document
+//This is the only required rule in ruleset.
+ColumnListRule:
+'column names in ' '[' column_names_list += ColumnName[','] ']'
+;
+
+//Rule Document
+RequiredColumnsRule:
+required_columns_rule_input = 'all columns required'
+;
+
+//Rule Document
+ExtraColumnsRule:
+extra_columns_rule_input = 'no extra columns allowed'
+;
+
+//Rule Document
+ColumnOrderRule:
+column_order_rule_input = 'check column order'
+;
+
+//***ValueRules may be of three types: InColumnValueRule | CrossColumnValueRule | ConditionalRule ***
+//*** For now developing RuleSet with just InColumnValueRule and ConditionalRule.***
+ValueRule:
+InColumnValueRule | ConditionalRule
+;
+
+//Rule Document
+BlockInColumnValueRule:
+'ruleblock: ' '[' block_rule_column_names_list += ColumnName[','] ']'
+setlocalrules *= SetLocalValueRule
+valuerules += ColumnValueRule
+;
+
+//Rule Document
+InColumnValueRule:
+'column: ' column_name = ColumnName
+setlocalrules *= SetLocalValueRule
+valuerules += ColumnValueRule
+;
+
+//Rule Document
+ColumnValueRule:
+HasValueTypeRule | HasValueFormatRule | HasValueTypeInRule | IsUniqueRule | IsRequiredRule | IsNullRule | IsNotNullRule | ValueInRule | ValueNotInRule | HasValueRule | NotHasValueRule | IsEqualToRule | IsNotEqualToRule | IsGreaterThanRule | IsLessThanRule | IsGreaterThanOrEqualToRule | IsLessThanOrEqualToRule | HasLengthRule | HasMinLengthRule | HasMaxLengthRule | StartsWithRule | EndsWithRule | IncludesRule | DoesNotIncludeRule | HasSignificantDigitsRule | HasDecimalPlacesRule | HasPatternRule
+;
+
+//Rule Document
+SetLocalValueRule:
+SetLocalToleranceRule
+;
+
+//Rule Document
+HasValueTypeRule:
+'has value type ' value_type_input = ValueType
+;
+
+//Rule Document
+//**NOT CODED FOR NOW.**
+HasValueTypeInRule:
+'has value type in ' '[' value_type_input_list += ValueType[','] ']'
+;
+
+//Rule Document
+HasValueFormatRule:
+'has format ' value_format_input = FormatType
+;
+
+//Rule Document
+IsUniqueRule:
+is_unique_input = 'is unique'
+;
+
+//Rule Document
+IsRequiredRule:
+is_required_input = 'is required'
+;
+
+//Rule Document
+IsNullRule:
+is_null_input = 'is null'
+;
+
+//Rule Document
+IsNotNullRule:
+is_not_null_input = 'is not null'
+;
+
+//Rule Document
+HasPatternRule:
+'has pattern ' has_pattern_input =  RegEx
+;
+
+//Values can be strings, integers or floats.
+//Boolean values such as True or TRUE must be supplied as strings.
+ValueInRule:
+'is in' '[' value_in_input += Value[','] ']'
+;
+
+//Values can be strings, integers or floats.
+//Boolean values such as True or TRUE must be supplied as strings.
+ValueNotInRule:
+'is not in' '[' value_not_in_input += Value[','] ']'
+;
+
+//Rule Document
+HasValueRule:
+'is ' reference_value_input = STRING
+;
+
+//Rule Document
+NotHasValueRule:
+'is not ' reference_value_input = STRING
+;
+
+//Rule Document
+IsEqualToRule:
+'is == ' reference_value_input =  NUMBER
+;
+
+//Rule Document
+IsNotEqualToRule:
+'is != ' reference_value_input = NUMBER
+;
+
+//RuleDocument
+IsGreaterThanRule:
+'is > ' reference_value_input = NUMBER
+;
+
+//RuleDocument
+IsLessThanRule:
+'is < ' reference_value_input = NUMBER
+;
+
+//RuleDocument
+IsGreaterThanOrEqualToRule:
+'is >= ' reference_value_input = NUMBER
+;
+
+//RuleDocument
+IsLessThanOrEqualToRule:
+'is <= ' reference_value_input = NUMBER
+;
+
+//RuleDocument
+HasLengthRule:
+'has length ' has_length_input = INT
+;
+
+//RuleDocument
+HasMinLengthRule:
+'has min length ' has_min_length_input = INT
+;
+
+//RuleDocument
+HasMaxLengthRule:
+'has max length ' has_max_length_input = INT
+;
+
+//RuleDocument
+StartsWithRule:
+'starts with ' starts_with_input = STRING | 'starts with ' starts_with_input = INT
+;
+
+//RuleDocument
+EndsWithRule:
+'ends with ' ends_with_input = STRING | 'ends with ' ends_with_input = INT
+;
+
+//RuleDocument
+IncludesRule:
+'includes ' includes_input = STRING | 'includes ' includes_input = INT
+;
+
+//RuleDocument
+DoesNotIncludeRule:
+'does not include ' does_not_include_input = STRING | 'does not include ' does_not_include_input = INT
+;
+
+//RuleDocument
+HasSignificantDigitsRule:
+'has ' significant_digits_input = INT 'significant digits' | 'has' significant_digits_input = INT 'significant digit'
+;
+
+//RuleDocument
+HasDecimalPlacesRule:
+'has ' decimal_places_input = INT 'decimal places' | 'has' decimal_places_input = INT 'decimal place'
+;
+
+//RuleDocument
+HasPatternRule:
+'has pattern ' regex_input = RegEx
+;
+
+//Rule Document
+SetLocalToleranceRule:
+'set tolerance at ' local_tolerance_input = Value
+;
+
+//Rule Document
+ValueType:
+'string' | 'integer' | 'floating point' | 'boolean' | 'date-time' | 'scientific' | 'complex'
+;
+
+//Rule Document
+FormatType:
+DateTimeFormatType | GeoLocationFormatType
+;
+
+//Rule Document
+DateTimeFormatType:
+'HH:mm:ss' | 'HH:mm' | 'hh:mm:ss AM/PM' | 'hh:mm AM/PM' | 'HHmmss' | 'YYYY-MM-DDTHH:mm:ss+hh:mm' |'YYYY-MM-DDTHH:mm:ss.sssZ' |'YYYY-MM-DDTHH:mm:ss' | 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD HH:mm' | 'YYYY-MM-DDTHH:mm'| 'DD/MM/YYYY HH:mm:ss' | 'MM-DD-YYYY hh:mm:ss AM/PM' | 'YYYY/MM/DD HH:mm:ss' | 'YYYY-MM-DD' | 'MM-DD-YYYY' | 'DD-MM-YYYY' | 'YYYY/MM/DD' | 'MM/DD/YYYY'| 'DD/MM/YYYY' | 'YYYY.MM.DD' | 'MM.DD.YYYY' | 'DD.MM.YYYY' | 'YYYYMMDD' | 'YYYY'
+;
+
+//Rule Document
+GeoLocationFormatType:
+'[N,S]DD.DDDD' | '[E,W]DD.DDDD'
+;
+
+//Rule Document
+ConditionalRule:
+rule_tag = ConditionalRuleTag
+'if'
+column_value_rule_input_1 = InColumnValueRule
+'then'
+column_value_rule_input_2 += InColumnValueRule
+;
+
+//Rule Document
+Value:
+STRING | NUMBER
+;
+
+//Rule Document
+ColumnName:
+name = STRING
+;
+
+//Rule Document
+ConditionalRuleTag:
+name = STRING
+;
+
+//Rule Document
+RegEx:
+/\/.*\//
+;
+
+//Rule Document
+Comment:
+  /\/\*(.|\n)*?\*\// | /\/\/.*?$/
+;

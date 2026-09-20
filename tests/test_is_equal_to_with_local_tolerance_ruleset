@@ -1,0 +1,13 @@
+allowed null values in ['Not Collected']
+
+
+column names in ['value1', 'value2']
+
+column: 'value1'
+set tolerance at 0.001
+is == 10
+
+
+column: 'value2'
+set tolerance at 0.000001
+is == 20

@@ -1,0 +1,8 @@
+column names in ['value1', 'value2']
+all columns required
+
+column: 'value1' 
+starts with 'NHI'
+
+column: 'value2'
+starts with 2

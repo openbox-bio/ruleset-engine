@@ -1,0 +1,6 @@
+allowed null values in ['Not Measured']
+
+column names in ['value1']
+
+column: 'value1'
+has format YYYY-MM-DD

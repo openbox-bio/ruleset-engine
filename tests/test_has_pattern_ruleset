@@ -1,0 +1,82 @@
+column names in ['value1','value2','value3','value4','value5','value6','value7','value8','value9','value10','value11','value12','value13','value14','value15','value16','value17','value18','value19','value20']
+all columns required
+
+column: 'value1' 
+// Exact string matching
+has pattern /^ABC$/
+
+column: 'value2' 
+// Beginning anchor
+has pattern /^ABC.*/
+
+column: 'value3' 
+// End anchor
+has pattern /^.*XYZ$/
+
+column: 'value4' 
+// Simple substring
+has pattern /.*cat.*/
+
+column: 'value5' 
+// Digits only
+has pattern /^\d+$/
+
+column: 'value6' 
+// Alphabetic validation
+has pattern /^[A-Za-z]+$/
+
+column: 'value7' 
+// Alphanumeric validation
+has pattern /^[A-Za-z0-9]+$/
+
+column: 'value8' 
+// Email format
+has pattern /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
+
+column: 'value9' 
+// Exact length (5 digits)
+has pattern /^\d{5}$/
+
+column: 'value10' 
+// Length range (2–4 uppercase letters)
+has pattern /^[A-Z]{2,4}$/
+
+column: 'value11' 
+// Optional character
+has pattern /^colou?r$/
+
+column: 'value12' 
+// One or more occurrences
+has pattern /^A+$/
+
+column: 'value13' 
+// Zero or more occurrences
+has pattern /^A*$/
+
+column: 'value14' 
+// Alternation
+has pattern /^(cat|dog)$/
+
+column: 'value15' 
+// Hexadecimal characters
+has pattern /^[0-9A-F]+$/
+
+column: 'value16' 
+// No whitespace
+has pattern /^\S+$/
+
+column: 'value17' 
+// Exactly one uppercase E
+has pattern /^[^E]*E[^E]*$/
+
+column: 'value18' 
+// Date format (YYYY-MM-DD)
+has pattern /^\d{4}-\d{2}-\d{2}$/
+
+column: 'value19' 
+// Positive lookahead (contains at least one digit and one uppercase letter)
+has pattern /^(?=.*\d)(?=.*[A-Z]).+$/
+
+column: 'value20' 
+// Positive lookbehind (digits immediately preceded by "USD")
+has pattern /(^USD)\d+/

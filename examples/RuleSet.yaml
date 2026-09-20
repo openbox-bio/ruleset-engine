@@ -1,0 +1,111 @@
+###############################################################################
+#set_values section is to set values that will be used by the data validator.
+#All are optional.
+###############################################################################
+set_values:
+  - set_locale: 'US'
+  - null_values: 
+    - 'Not Reported'
+    - 'Not Collected'
+  - set_thousands_separator: ','
+  - set_precision: 4
+###############################################################################
+# column_rules section includes rules that specify column names; requiredness
+# and column order. Only required rule is column_names. All others are optional.
+###############################################################################
+
+column_rules:
+  - column_names: 
+    - 'ID'
+    - 'First Name'
+    - 'Last Name'
+    - 'Year of Birth'
+    - 'Country'
+  - all_columns_required: true
+  - no_extra_columns_allowed: true
+  - check_column_order: true
+
+###############################################################################
+# block_rules section allow for a set of atomic rules to be specified across
+# multiple columns.
+###############################################################################
+
+block_rules:
+  - columns:
+    - 'ID'
+    - 'First Name'
+    - 'Last Name'
+    rules:
+      - value_type: string
+      - required: true
+      - starts_with: 'PSA'
+
+  - columns:
+    - 'Age'
+    - 'Height'
+    - 'Weight'
+    rules: 
+      - value_type: number
+      - required: true
+      - gte: 0
+
+value_rules:
+  - column: 'ID'
+    rules:
+    - value_type: string
+    - unique: true
+    - required: true
+    - starts_with: 'PSA'
+  - column: 'Name'
+    rules:
+    - value_type: string
+  - column: 'Year'
+    rules:
+    - value_type: date-time
+    - format: 'YYYY'
+  - column: 'Country'
+    rules:
+    - in: ['EGY', 'IND']
+    - value_type: string 
+    - format: YYYY-MMM-DD 
+    - unique: true 
+    - required: true
+    - is_null: true
+    - not_null: true 
+    - in: [A, B, C]
+    - not_in: [X, Y, Z] 
+    - in_file : <file_name> # coding for this rule is in progress.
+    - not_in_file: <file_name> # coding for this rule is in progress.
+    - equals: "some value" 
+    - not_equals: "other value"
+    - eq: 10 
+    - neq: 5 
+    - gt: 1.5 
+    - lt: 100 
+    - gte: 10
+    - lte: 20
+    - length: 8
+    - min_length: 2
+    - max_length: 10 
+    - starts_with: "PSA"  
+    - ends_with: ".com"
+    - includes: "ABC"
+    - not_includes: "XYZ"
+    - significant_digits: 3
+    - decimal_places: 2
+    - pattern: "^[A-Z]{2}[0-9]{4}$"
+
+conditional_rules:
+  if:
+  - column: 'ID'
+    rule:
+    - in: ['WAL', 'ENG']
+  then:
+  - column: 'Name'
+    rule:
+    - is unique
+  - column: 'Zip_Code'
+    rule:
+    - value_type: string
+
+

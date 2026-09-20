@@ -1,0 +1,15 @@
+set tolerance at 0.00001
+allowed null values in ['Not Collected']
+column names in ['value1', 'value2']
+
+//For column: value1
+//values: 10.000001, 10, 10.000004 should be equal to 10.0 at a precision of 0.00001.
+//values: 10.00002, 10.000015, 10.000018 should not be equal to 10.0 at a precision of 0.00001.
+column: 'value1'
+is == 10.0
+
+//For column: value2
+// values: 20.00002, 20.000018 and 20.000024 should all be equal to 20.00002 at a precision of 0.00001.
+//values: 20.000021, 20.000014, 20.00024 should not be equal to 20.00002 at a precision of 0.00001.
+column: 'value2'
+is == 20.00002

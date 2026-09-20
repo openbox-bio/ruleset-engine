@@ -1,0 +1,56 @@
+//Rules to validate squash_playsers.csv
+//In addition to value type these rules specify additional constraints.
+// Column ID should be unique, each value should start with 'PSA'; PSA0000 is not a valid value.
+// Column Country can have only one of the following values: 
+//'EGY', 'PER', 'NZL', 'IND', 'MAS', 'WAL', 'ENG', 'FRA', 'SUI'.
+//Column Year_of_Birth should have the format 'YYYY'
+//Conditional rules:
+//Zip for Wales should start with 'NP'
+//Zip for Egypt should be 5 characters long.
+//-------------------------------------
+
+column names in ['Rank', 'PSA_ID', 'First_Name', 'Last_Name', 'Country', 'Year_of_Birth', 'Address', 'Zip_Code']
+all columns required
+no extra columns allowed
+
+column: 'Rank'
+has value type integer
+is > 0
+
+column: 'PSA_ID'
+has value type string
+is unique
+starts with 'PSA'
+is not 'PSA0000'
+
+column: 'First_Name'
+has value type string
+
+column: 'Last_Name'
+has value type string
+
+column: 'Country'
+has value type string
+is in ['EGY', 'PER', 'NZL', 'IND', 'MAS', 'WAL', 'ENG', 'FRA', 'SUI']
+
+column: 'Year_of_Birth'
+has value type date-time
+has format YYYY
+
+column: 'Address'
+has value type string
+
+column: 'Zip_Code'
+is not null
+
+conditional rule: 'Country-Zip1'
+if
+column: 'Country' is in ['WAL', 'ENG']
+then
+column: 'Zip_Code' has value type string
+
+conditional rule: 'Country-Zip2'
+if
+column: 'Country' is not in ['WAL', 'ENG']
+then
+column: 'Zip_Code' has value type integer
