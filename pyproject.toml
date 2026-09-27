@@ -6,8 +6,8 @@ build-backend = "setuptools.build_meta"
 name = "ruleset-engine"
 version = "1.0.0"
 description = "ruleset-engine validates tabular data files against data validation rules written in the RuleSet language."
-requires-python = ">=3.8"
-dependencies = ["textX"]
+requires-python = ">=3.9"
+dependencies = ["textX", "pandas>=2.0"]
 
 [project.scripts]
 ruleset-engine = "ruleset.cli:main"

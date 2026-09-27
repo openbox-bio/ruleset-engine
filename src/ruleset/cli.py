@@ -4,7 +4,6 @@ from importlib.resources import files
 from textx import get_location, TextXSyntaxError
 from textx.metamodel import metamodel_from_file
 import pandas as pd
-import numpy as np
 from collections import Counter
 from collections import defaultdict
 from pandas._libs.parsers import STR_NA_VALUES
