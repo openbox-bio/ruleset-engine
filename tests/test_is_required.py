@@ -1,30 +1,32 @@
-import sys
-sys.path.insert(0, "/home/anjan_purkayastha/Documents/openboxbio/20211227_dsl-for-data-validation/code/ruleset_engine/")
+from pathlib import Path
 
 import unittest
-from textx import get_location, TextXSyntaxError
+from textx import TextXSyntaxError
 from textx.metamodel import metamodel_from_file
 import sys
 import pandas as pd
 from pandas._libs.parsers import STR_NA_VALUES
 from ruleset import in_column_value_rules as i
 from ruleset import set_value_rules as s
+from ruleset.cli import get_grammar_path
+
+TESTS_DIR = Path(__file__).parent
 
 class TestIsRequired(unittest.TestCase):
 	def test_is_required_all_ok(self):
 		'''
 		Tests that is required function returns All OK, with an input file with no null values.
 		'''
-		rules_infile = "test_is_required_ruleset"
-		data_infile = "test_is_required_all_ok.csv"
+		rules_infile = TESTS_DIR / "test_is_required_ruleset"
+		data_infile = TESTS_DIR / "test_is_required_all_ok.csv"
 		'''
 		Read the Ruleset metamodel from metamodel file.
 		Read the rules file.
 		'''
-		metamodel_infile = "../ruleset/RuleSet.tx"
+		metamodel_infile = get_grammar_path()
 		mm = metamodel_from_file(metamodel_infile, autokwd=True)
 		try:
-			demo_rules = mm.model_from_file(rules_infile)
+			demo_rules = mm.model_from_file(str(rules_infile))
 		except TextXSyntaxError as err:
 			print(f'Syntax Error found in {err.filename} in line {err.line}, column {err.col}')
 			print(f'Error: {err.message}')
@@ -70,16 +72,16 @@ class TestIsRequired(unittest.TestCase):
 		Tests that "is required" function returns All OK.
 		It identifies expected error in data file.
 		'''
-		rules_infile = "test_is_required_ruleset"
-		data_infile = "test_is_required_with_errors.csv"
+		rules_infile = TESTS_DIR / "test_is_required_ruleset"
+		data_infile = TESTS_DIR / "test_is_required_with_errors.csv"
 		'''
 		Read the Ruleset metamodel from metamodel file.
 		Read the rules file.
 		'''
-		metamodel_infile = "../ruleset/RuleSet.tx"
+		metamodel_infile = get_grammar_path()
 		mm = metamodel_from_file(metamodel_infile, autokwd=True)
 		try:
-			demo_rules = mm.model_from_file(rules_infile)
+			demo_rules = mm.model_from_file(str(rules_infile))
 		except TextXSyntaxError as err:
 			print(f'Syntax Error found in {err.filename} in line {err.line}, column {err.col}')
 			print(f'Error: {err.message}')
