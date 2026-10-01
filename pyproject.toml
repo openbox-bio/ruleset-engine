@@ -17,3 +17,6 @@ ruleset = "ruleset.metamodel:ruleset_lang"
 
 [tool.setuptools.package-data]
 ruleset = ["Ruleset.tx"]
+
+[project.optional-dependencies]
+test = ["pytest"]
