@@ -1,13 +1,20 @@
+classifiers = [
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "ruleset-engine"
-version = "1.0.0"
+version = "1.0.2"
 description = "ruleset-engine validates tabular data files against data validation rules written in the RuleSet language."
 requires-python = ">=3.9"
-dependencies = ["textX", "pandas>=2.0", "openpyxl==3.1.5"]
+dependencies = ["textX", "pandas>=2.0", "openpyxl>=3.1.5"]
 license = "MIT"
 license-files = ["LICENSE"]
 

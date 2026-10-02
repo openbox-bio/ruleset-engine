@@ -4,7 +4,6 @@
 
 [![PyPI version](https://img.shields.io/pypi/v/ruleset-engine.svg)](https://pypi.org/project/ruleset-engine/)
 [![CI](https://github.com/openbox-bio/ruleset-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/openbox-bio/ruleset-engine/actions/workflows/ci.yml)
-[![License](https://img.shields.io/github/license/openbox-bio/ruleset-engine.svg)](LICENSE)
 [![Python versions](https://img.shields.io/pypi/pyversions/ruleset-engine.svg)](pyproject.toml)
 <!--
   The PyPI badge above will 404 until the package is actually published --
