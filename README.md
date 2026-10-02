@@ -63,7 +63,7 @@ See [`docs/RuleSet_DSL_Full.md`](docs/RuleSet_DSL_Full.md) for the complete lang
 
 ## Why RuleSet?
 
-Most data validation tools — [Pandera](https://github.com/unionai-oss/pandera), [Great Expectations](https://github.com/great-expectations/great_expectations) — are built for people who are comfortable writing Python. That's the right choice for engineering teams, but it puts validation out of reach for the domain experts who often understand the data best: the biologist who knows a Zip code should never be null, the analyst who knows which countries are even valid.
+Most data validation tools — [Pandera](https://github.com/unionai-oss/pandera), [Great Expectations](https://github.com/great-expectations/great_expectations) — are built for programmers and data scientists. That's the right choice for engineering teams, but it puts validation out of reach for the domain experts who often understand the data best: the biologist who knows disease terminology, the analyst who knows which countries are even valid.
 
 RuleSet is built the other way around: rules are short, declarative, English-like statements that a non-coder can write, read back, and trust — while `ruleset-engine` still gives engineering teams a real, scriptable CLI to run those same rules in a pipeline or CI job.
 
