@@ -20,3 +20,5 @@ ruleset = ["Ruleset.tx"]
 
 [project.optional-dependencies]
 test = ["pytest"]
+
+license = { file = "LICENSE" }

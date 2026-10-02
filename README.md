@@ -65,7 +65,7 @@ See [`docs/RuleSet_DSL_Full.md`](docs/RuleSet_DSL_Full.md) for the complete lang
 
 Most data validation tools — [Pandera](https://github.com/unionai-oss/pandera), [Great Expectations](https://github.com/great-expectations/great_expectations) — are built for programmers and data scientists. That's the right choice for engineering teams, but it puts validation out of reach for the domain experts who often understand the data best: the biologist who knows disease terminology, the analyst who knows which countries are even valid.
 
-RuleSet is built the other way around: rules are short, declarative, English-like statements that a non-coder can write, read back, and trust — while `ruleset-engine` still gives engineering teams a real, scriptable CLI to run those same rules in a pipeline or CI job.
+RuleSet is built the other way around: rules are short, declarative, English-like statements that a non-coder can write, read back, and trust — while `ruleset-engine` still gives engineering teams a real, scriptable CLI to run those same rules in a data engineering pipeline.
 
 
 ## Installation Options
@@ -74,7 +74,6 @@ RuleSet is built the other way around: rules are short, declarative, English-lik
 |---|---|---|
 | pip | `pip install ruleset-engine` | Yes |
 | pipx | `pipx install ruleset-engine` | Yes (isolated automatically) |
-| Standalone binary | Download from [Releases](https://github.com/openbox-bio/ruleset-engine/releases) | No |
 
 ## Contributing
 
@@ -89,4 +88,4 @@ Contributions, bug reports, and feature requests are welcome — please open an 
 
 ## License
 
-[Specify license here, e.g. MIT] — see [`LICENSE`](LICENSE) for details.
+MIT — see [`LICENSE`](LICENSE) for details.
