@@ -7,7 +7,7 @@ name = "ruleset-engine"
 version = "1.0.0"
 description = "ruleset-engine validates tabular data files against data validation rules written in the RuleSet language."
 requires-python = ">=3.9"
-dependencies = ["textX", "pandas>=2.0"]
+dependencies = ["textX", "pandas>=2.0", "openpyxl==3.1.5"]
 
 [project.scripts]
 ruleset-engine = "ruleset.cli:main"
