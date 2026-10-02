@@ -8,6 +8,8 @@ version = "1.0.0"
 description = "ruleset-engine validates tabular data files against data validation rules written in the RuleSet language."
 requires-python = ">=3.9"
 dependencies = ["textX", "pandas>=2.0", "openpyxl==3.1.5"]
+license = "MIT"
+license-files = ["LICENSE"]
 
 [project.scripts]
 ruleset-engine = "ruleset.cli:main"
@@ -21,4 +23,3 @@ ruleset = ["Ruleset.tx"]
 [project.optional-dependencies]
 test = ["pytest"]
 
-license = { file = "LICENSE" }
