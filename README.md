@@ -2,9 +2,9 @@
 
 **A data validation language non-coders can read, write, and maintain.**
 
-[![PyPI version](https://img.shields.io/pypi/v/ruleset-engine.svg)](https://pypi.org/project/ruleset-engine/)
+[![PyPI version](https://img.shields.io/pypi/v/ruleset-engine.svg?cachebust=1)](https://pypi.org/project/ruleset-engine/)
 [![CI](https://github.com/openbox-bio/ruleset-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/openbox-bio/ruleset-engine/actions/workflows/ci.yml)
-[![Python versions](https://img.shields.io/pypi/pyversions/ruleset-engine.svg)](pyproject.toml)
+[![License](https://img.shields.io/github/license/openbox-bio/ruleset-engine.svg?cachebust=1)](LICENSE)
 <!--
   The PyPI badge above will 404 until the package is actually published --
   remove it until then, or it'll render as a broken badge on the repo page.
