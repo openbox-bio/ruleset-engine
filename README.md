@@ -20,7 +20,7 @@ RuleSet is a data validation language that domain experts can use to develop, ma
 pip install ruleset-engine
 ```
 
-### Write a rules file
+### Example rules file
 
 ```dsl
 // squash_rules.rules
@@ -44,10 +44,10 @@ is not null
 ### Validate your data
 
 ```bash
-ruleset-engine --rules-file squash_rules.rules --data-file players.csv
+ruleset-engine --rules-file <rules_file> --data-file <data_file.csv>
 ```
 
-`ruleset-engine` checks `players.csv` against every rule in `squash_rules.rules` and writes a timestamped log file reporting what passed and what didn't — no Python required to read or write the rules themselves.
+`ruleset-engine` checks `data_file.csv` against every rule in `rules_file` and writes a timestamped log file reporting what passed and what didn't — no Python required to read or write the rules themselves.
 
 ## Key Features
 
@@ -58,7 +58,7 @@ ruleset-engine --rules-file squash_rules.rules --data-file players.csv
 - **No implicit evaluation** — nothing is checked unless a rule explicitly says so.
 - **No data modification** — validation never changes your data, ever.
 
-See [`docs/RuleSet_DSL_Full.md`](docs/RuleSet_DSL_Full.md) for the complete language reference, including all supported value types, date/time formats, and a full worked example.
+See the [`RuleSet Usage Guide`](https://github.com/openbox-bio/ruleset-engine/tree/main/docs/RuleSet_DSL_Full.md) for the complete language reference, including all supported value types, date/time formats, and a full worked example.
 
 ## Why RuleSet?
 
