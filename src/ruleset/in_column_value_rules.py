@@ -9,6 +9,8 @@ def check_has_value_type_rule(df, input_column_name, input_rule, **kwargs):
 	Checks if the value type of column matches value type specified by HasValueTypeRule. If a separator is specified by the 
 	ThousandsSeparatorRule then this is taken into account when evaluating columns of value type integer and floating point.
 	Function returns a list of boolean values (True => valid value, False => invalid value) and a list of error messages.
+	Does not return null and non-numeric  warnings if 'ignore null warnings' rule is set. 
+	If 'ignore warnings' rule is not set, then null values are reported as warnings.
 
 	Args:
 		df (pandas.core.frame.DataFrame): the Pandas dataframe that stores the parsed data.
@@ -28,6 +30,9 @@ def check_has_value_type_rule(df, input_column_name, input_rule, **kwargs):
 	except:
 		separator = ""
 
+	#set ignore_warnings flag to True if IgnoreNullWarningsRule is set, else set it to False.
+	ignore_warnings = 'IgnoreWarningsRule' in (kwargs.get('input_set_value_rules') or {})
+
 	#initialize error_log_list.
 	error_log_list = []
 	
@@ -39,7 +44,7 @@ def check_has_value_type_rule(df, input_column_name, input_rule, **kwargs):
 			for index in invalid_value_indices:
 				if not pd.isnull(df[input_column_name][index]):
 					error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not a string.')
-				else:
+				elif pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 
 	
@@ -51,7 +56,7 @@ def check_has_value_type_rule(df, input_column_name, input_rule, **kwargs):
 			for index in invalid_value_indices:
 				if not pd.isnull(df[input_column_name][index]):
 					error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not an integer.')
-				else:
+				elif pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 				
 	# floating point check.
@@ -62,7 +67,7 @@ def check_has_value_type_rule(df, input_column_name, input_rule, **kwargs):
 			for index in invalid_value_indices:
 				if not pd.isnull(df[input_column_name][index]):
 					error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not a floating point.')
-				else:
+				elif pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 
 	# boolean check.
@@ -73,7 +78,7 @@ def check_has_value_type_rule(df, input_column_name, input_rule, **kwargs):
 			for index in invalid_value_indices:
 				if not pd.isnull(df[input_column_name][index]):
 					error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not a boolean value.')
-				else:
+				elif pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 
 	# scientific notation check.
@@ -84,7 +89,7 @@ def check_has_value_type_rule(df, input_column_name, input_rule, **kwargs):
 			for index in invalid_value_indices:
 				if not pd.isnull(df[input_column_name][index]):
 					error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not in scientific notation.')
-				else:
+				elif pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 
 	# complex number check.
@@ -95,7 +100,7 @@ def check_has_value_type_rule(df, input_column_name, input_rule, **kwargs):
 			for index in invalid_value_indices:
 				if not pd.isnull(df[input_column_name][index]):
 					error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not a complex number.')
-				else:
+				elif pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 	  
 	# date-time check.
@@ -106,7 +111,7 @@ def check_has_value_type_rule(df, input_column_name, input_rule, **kwargs):
 			for index in invalid_value_indices:
 				if not pd.isnull(df[input_column_name][index]):
 					error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not a date-time value.')
-				else:
+				elif pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 
 	return valid_value_mask.to_list(), error_log_list
@@ -115,6 +120,8 @@ def check_has_value_format_rule(df, input_column_name, input_rule, **kwargs):
 	'''
 	Checks if the value format of column matches value format specified by HasValueFormatRule. 
 	Function returns a list of boolean values (True => valid value, False => invalid value) and a list of error messages.
+	Does not return null and non-numeric  warnings if 'ignore null warnings' rule is set. 
+	If 'ignore warnings' rule is not set, then null values are reported as warnings.
 	Args:
 		df (pandas.core.frame.DataFrame): the Pandas dataframe that stores the parsed data.
 		input_rule (HasValueFormatRule) : the HasValueFormatRule object.
@@ -127,6 +134,10 @@ def check_has_value_format_rule(df, input_column_name, input_rule, **kwargs):
 	#Ingest provided value format for column in question.
 	value_format_input = input_rule.value_format_input
 
+	#set ignore_warnings flag to True if IgnoreNullWarningsRule is set, else set it to False.
+	ignore_warnings = 'IgnoreWarningsRule' in (kwargs.get('input_set_value_rules') or {})
+	
+
 	#initialize error_log_list.
 	error_log_list = []
 	is_valid_format_mask = df[input_column_name].apply(lambda x: h.is_valid_format(x, value_format_input))
@@ -135,7 +146,7 @@ def check_has_value_format_rule(df, input_column_name, input_rule, **kwargs):
 		for index in invalid_value_indices:
 			if not pd.isnull(df[input_column_name][index]):
 				error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not in the correct format.')
-			else:
+			elif pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 				error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 
 	valid_value_mask = is_valid_format_mask.to_list()
@@ -387,6 +398,8 @@ def check_is_equal_to_rule(df, input_column_name, input_rule, **kwargs):
 	If level of tolerance has been set, then tolerance is set to user's input, otherwise a default of 0.001 (3 decimal places) is used.
 	Prints an error message with column name and row number for value that is not equal to allowed value.
 	This rule is used to compare numerical values.
+	Does not return null and non-numeric  warnings if 'ignore null warnings' rule is set. 
+	If 'ignore warnings' rule is not set, then null values and non-numeric values are reported as warnings.
 
 	Args:
 		df (pandas.core.frame.DataFrame): the Pandas dataframe that stores the parsed data.
@@ -400,7 +413,10 @@ def check_is_equal_to_rule(df, input_column_name, input_rule, **kwargs):
 	#initialize error_log_list and valid_value_mask.
 	error_log_list = []
 	valid_value_mask = []
-	
+
+	#set ignore_warnings flag to True if IgnoreNullWarningsRule is set, else set it to False.
+	ignore_warnings = 'IgnoreWarningsRule' in (kwargs.get('input_set_value_rules') or {})
+
 	#Ingest provided value type and value format for column in question.
 	reference_value = input_rule.reference_value_input
 
@@ -423,14 +439,17 @@ def check_is_equal_to_rule(df, input_column_name, input_rule, **kwargs):
 
 	if invalid_value_indices:
 			for index in invalid_value_indices:
-				if pd.isnull(df[input_column_name][index]):
+				if pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 					continue
-				elif not h.is_numeric(no_separator_column_values[index]): # if separator removed value is not numeric, raise warning.
+
+				if not h.is_numeric(no_separator_column_values[index]) and not ignore_warnings: # if separator removed value is not numeric and ignore warnings is False, raise warning.
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not numeric.')
 					continue
-				else:
+
+				if h.is_numeric(no_separator_column_values[index]): #if separator removed value is numeric, then raise error if it is not equal to reference value.
 					error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not equal to {reference_value}.')
+					continue
 
 	valid_value_mask = is_equal_to_mask.to_list()
 	return valid_value_mask, error_log_list
@@ -442,6 +461,8 @@ def check_is_not_equal_to_rule(df, input_column_name, input_rule, **kwargs):
 	If level of tolerance has been set, then tolerance is set to user's input, otherwise a default of 0.001 (3 decimal places) is used.
 	Prints an error message with column name and row number for value that is equal to disallowed value.
 	This rule is used to compare numerical values.
+	Does not return null and non-numeric  warnings if 'ignore null warnings' rule is set. 
+	If 'ignore warnings' rule is not set, then null values and non-numeric values are reported as warnings.
 
 	Args:
 		df (pandas.core.frame.DataFrame): the Pandas dataframe that stores the parsed data.
@@ -455,6 +476,9 @@ def check_is_not_equal_to_rule(df, input_column_name, input_rule, **kwargs):
 	#initialize error_log_list and valid_value_mask.
 	error_log_list = []
 	valid_value_mask = []
+
+	#set ignore_warnings flag to True if IgnoreNullWarningsRule is set, else set it to False.
+	ignore_warnings = 'IgnoreWarningsRule' in (kwargs.get('input_set_value_rules') or {})
 	
 	#Ingest provided value type and value format for column in question.
 	reference_value = input_rule.reference_value_input
@@ -478,14 +502,16 @@ def check_is_not_equal_to_rule(df, input_column_name, input_rule, **kwargs):
 	
 	if invalid_value_indices:
 			for index in invalid_value_indices:
-				if pd.isnull(df[input_column_name][index]):
+				if pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 					continue
-				elif not h.is_numeric(no_separator_column_values[index]): # if separator removed value is not numeric, raise warning.
+
+				if not h.is_numeric(no_separator_column_values[index]) and not ignore_warnings: # if separator removed value is not numeric and ignore_warnings is False, raise warning.
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not numeric.')
 					continue
-				else:
+				if h.is_numeric(no_separator_column_values[index]): #if separator removed value is numeric, then raise error if it is equal to reference value.
 					error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is equal to {reference_value}.')
+					continue
 
 	valid_value_mask = is_equal_to_mask.to_list()
 
@@ -498,6 +524,8 @@ def check_is_greater_than_rule(df, input_column_name, input_rule, **kwargs):
 	If level of tolerance has been set, then tolerance is set to user's input, otherwise a default of 0.001 (3 decimal places) is used.
 	Prints an error message with column name and row number for value that is not greater than to reference value.
 	This rule is used to compare numerical values.
+	Does not return null and non-numeric  warnings if 'ignore null warnings' rule is set. 
+	If 'ignore warnings' rule is not set, then null values and non-numeric values are reported as warnings.
 
 	Args:
 		df (pandas.core.frame.DataFrame): the Pandas dataframe that stores the parsed data.
@@ -511,7 +539,10 @@ def check_is_greater_than_rule(df, input_column_name, input_rule, **kwargs):
 	#initialize error_log_list and valid_value_mask.
 	error_log_list = []
 	valid_value_mask = []
-	
+
+	#set ignore_warnings flag to True if IgnoreNullWarningsRule is set, else set it to False.
+	ignore_warnings = 'IgnoreWarningsRule' in (kwargs.get('input_set_value_rules') or {})
+
 	#Ingest provided value type and value format for column in question.
 	reference_value = input_rule.reference_value_input
 
@@ -534,14 +565,17 @@ def check_is_greater_than_rule(df, input_column_name, input_rule, **kwargs):
 
 	if invalid_value_indices:
 			for index in invalid_value_indices:
-				if pd.isnull(df[input_column_name][index]):
+				if pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 					continue
-				elif not h.is_numeric(no_separator_column_values[index]): # if separator removed value is not numeric, raise warning.
+
+				if not h.is_numeric(no_separator_column_values[index]) and not ignore_warnings: # if separator removed value is not numeric and ignore warnings is False, raise warning.
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not numeric.')
 					continue
-				else:
+
+				if h.is_numeric(no_separator_column_values[index]): #if separator removed value is numeric, then raise error if it is not greater than reference value.
 					error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not greater than {reference_value}.')
+					continue
 				
 	valid_value_mask = is_greater_than_mask.to_list()
 	return valid_value_mask, error_log_list
@@ -553,6 +587,8 @@ def check_is_greater_than_or_equal_to_rule(df, input_column_name, input_rule, **
 	If level of tolerance has been set, then tolerance is set to user's input, otherwise a default of 0.001 (3 decimal places) is used.
 	Prints an error message with column name and row number for value that is not greater than or equal to reference value.
 	This rule is used to compare numerical values.
+	Does not return null and non-numeric  warnings if 'ignore null warnings' rule is set. 
+	If 'ignore warnings' rule is not set, then null values and non-numeric values are reported as warnings.
 
 	Args:
 		df (pandas.core.frame.DataFrame): the Pandas dataframe that stores the parsed data.
@@ -566,6 +602,10 @@ def check_is_greater_than_or_equal_to_rule(df, input_column_name, input_rule, **
 	#initialize error_log_list and valid_value_mask.
 	error_log_list = []
 	valid_value_mask = []
+
+	#set ignore_warnings flag to True if IgnoreNullWarningsRule is set, else set it to False.
+	ignore_warnings = 'IgnoreWarningsRule' in (kwargs.get('input_set_value_rules') or {})
+
 	#Ingest provided value type and value format for column in question.
 	reference_value = input_rule.reference_value_input
 
@@ -588,15 +628,18 @@ def check_is_greater_than_or_equal_to_rule(df, input_column_name, input_rule, **
 
 	if invalid_value_indices:
 			for index in invalid_value_indices:
-				if pd.isnull(df[input_column_name][index]):
+				if pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 					continue
-				elif not h.is_numeric(no_separator_column_values[index]): # if separator removed value is not numeric, raise warning.
+
+				if not h.is_numeric(no_separator_column_values[index]) and not ignore_warnings: # if separator removed value is not numeric and if ignore warnings is False, raise warning.
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not numeric.')
 					continue
-				else:
+
+				if h.is_numeric(no_separator_column_values[index]): #if separator removed value is numeric, then raise error if it is not greater than or equal to reference value.
 					error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not greater than or equal to {reference_value}.')
-			
+					continue
+
 	valid_value_mask = is_greater_than_or_equal_to_mask.to_list()
 	return valid_value_mask, error_log_list
 
@@ -608,6 +651,8 @@ def check_is_less_than_rule(df, input_column_name, input_rule, **kwargs):
 	If level of tolerance has been set, then tolerance is set to user's input, otherwise a default of 0.001 (3 decimal places) is used.
 	Prints an error message with column name and row number for value that is not less than the reference value.
 	This rule is used to compare numerical values.
+	Does not return null and non-numeric  warnings if 'ignore null warnings' rule is set. 
+	If 'ignore warnings' rule is not set, then null values and non-numeric values are reported as warnings.
 
 	Args:
 		df (pandas.core.frame.DataFrame): the Pandas dataframe that stores the parsed data.
@@ -621,6 +666,10 @@ def check_is_less_than_rule(df, input_column_name, input_rule, **kwargs):
 	#initialize error_log_list and valid_value_mask.
 	error_log_list = []
 	valid_value_mask = []
+
+	#set ignore_warnings flag to True if IgnoreNullWarningsRule is set, else set it to False.
+	ignore_warnings = 'IgnoreWarningsRule' in (kwargs.get('input_set_value_rules') or {})
+
 	#Ingest provided value type and value format for column in question.
 	reference_value = input_rule.reference_value_input
 
@@ -643,15 +692,18 @@ def check_is_less_than_rule(df, input_column_name, input_rule, **kwargs):
 
 	if invalid_value_indices:
 			for index in invalid_value_indices:
-				if pd.isnull(df[input_column_name][index]):
+				if pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 					continue
-				elif not h.is_numeric(no_separator_column_values[index]): # if separator removed value is not numeric, raise warning.
+
+				if not h.is_numeric(no_separator_column_values[index]) and not ignore_warnings: # if separator removed value is not numeric and if ignore warnings is False, raise warning.
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not numeric.')
 					continue
-				else:
+				
+				if h.is_numeric(no_separator_column_values[index]): # if separator removed value is numeric, raise error if it is not less than reference value.
 					error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not less than {reference_value}.')
-			
+					continue
+
 	valid_value_mask = is_less_than_mask.to_list()
 	return valid_value_mask, error_log_list
 
@@ -662,6 +714,8 @@ def check_is_less_than_or_equal_to_rule(df, input_column_name, input_rule, **kwa
 	If level of tolerance has been set, then tolerance is set to user's input, otherwise a default of 0.001 (3 decimal places) is used.
 	Prints an error message with column name and row number for value that is not less than or equal to reference value.
 	This rule is used to compare numerical values.
+	Does not return null and non-numeric  warnings if 'ignore null warnings' rule is set. 
+	If 'ignore warnings' rule is not set, then null values and non-numeric values are reported as warnings.
 
 	Args:
 		df (pandas.core.frame.DataFrame): the Pandas dataframe that stores the parsed data.
@@ -675,6 +729,10 @@ def check_is_less_than_or_equal_to_rule(df, input_column_name, input_rule, **kwa
 	#initialize error_log_list and valid_value_mask.
 	error_log_list = []
 	valid_value_mask = []
+
+	#set ignore_warnings flag to True if IgnoreNullWarningsRule is set, else set it to False.
+	ignore_warnings = 'IgnoreWarningsRule' in (kwargs.get('input_set_value_rules') or {})
+
 	#Ingest provided value type and value format for column in question.
 	reference_value = input_rule.reference_value_input
 
@@ -697,14 +755,17 @@ def check_is_less_than_or_equal_to_rule(df, input_column_name, input_rule, **kwa
 
 	if invalid_value_indices:
 			for index in invalid_value_indices:
-				if pd.isnull(df[input_column_name][index]):
+				if pd.isnull(df[input_column_name][index]) and not ignore_warnings:
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is null.')
 					continue
-				elif not h.is_numeric(no_separator_column_values[index]): # if separator removed value is not numeric, raise warning.
+
+				if not h.is_numeric(no_separator_column_values[index]) and not ignore_warnings: # if separator removed value is not numeric and if ignore warnings is False, raise warning.
 					error_log_list.append(f'Warning: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not numeric.')
 					continue
-				else:
+
+				if h.is_numeric(no_separator_column_values[index]): # if separator removed value is numeric, raise error if it is not less than or equal to reference value.
 					error_log_list.append(f'Error: column {input_column_name}, row {index +1}: value {df[input_column_name][index]} is not less than or equal to {reference_value}.')
+					continue
 
 	valid_value_mask = is_less_than_or_equal_to_mask.to_list()
 	return valid_value_mask, error_log_list

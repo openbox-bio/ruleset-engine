@@ -9,7 +9,7 @@ conditional_rules *= ConditionalRule
 
 //Rule Document
 SetValueRule:
-SetNullValuesRule | SetLocaleRule | ThousandsSeparatorRule | SetGlobalToleranceRule | IgnoreNullWarningsRule
+SetNullValuesRule | SetLocaleRule | ThousandsSeparatorRule | SetGlobalToleranceRule | IgnoreWarningsRule
 ;
 
 //Rule Document
@@ -33,8 +33,8 @@ SetGlobalToleranceRule:
 ;
 
 //Rule Document
-IgnoreNullWarningsRule:
-'ignore null warnings'
+IgnoreWarningsRule:
+ignore_warnings_input = 'ignore warnings'
 ;
 
 //Rule Document
@@ -72,6 +72,7 @@ InColumnValueRule | ConditionalRule
 //Rule Document
 BlockInColumnValueRule:
 'ruleblock: ' '[' block_rule_column_names_list += ColumnName[','] ']'
+('description:' rule_block_description = STRING)?
 setlocalrules *= SetLocalValueRule
 valuerules += ColumnValueRule
 ;
@@ -79,6 +80,7 @@ valuerules += ColumnValueRule
 //Rule Document
 InColumnValueRule:
 'column: ' column_name = ColumnName
+('description:' column_description = STRING)?
 setlocalrules *= SetLocalValueRule
 valuerules += ColumnValueRule
 ;

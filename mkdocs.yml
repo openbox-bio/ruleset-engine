@@ -1,0 +1,41 @@
+site_name: RuleSet Documentation
+site_description: ruleset-engine validates tabular data files against data validation rules written in the RuleSet language.
+repo_url: https://github.com/openbox-bio/ruleset-engine
+repo_name: openbox-bio/ruleset-engine
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.expand
+    - toc.integrate
+    - search.suggest
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+nav:
+  - Introduction: index.md
+  - Quick Start: quick-start.md
+  - Rules File: rules-file.md
+  - Data File: data-file.md
+  - RuleSet Syntax:
+      - Overview: syntax/index.md
+      - Global Settings: syntax/global-settings.md
+      - Column Rules: syntax/column-rules.md
+      - Value Rules: syntax/value-rules.md
+      - Rule Blocks: syntax/rule-blocks.md
+      - Conditional Validation: syntax/conditional-validation.md
+      - The Log File: syntax/log-file.md
+
+markdown_extensions:
+  - tables
+  - fenced_code
+  - toc:
+      permalink: true
