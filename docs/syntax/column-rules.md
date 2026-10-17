@@ -15,21 +15,21 @@ column names in ['user_id', 'first_name', 'last_name', 'signup_date']
 
 #### `all columns required`
 **Description:** Fail if any of the named columns is missing.
-**Syntax & Example:**
+<br>**Syntax & Example:**
 ```
 all columns required
 ```
 
 #### `no extra columns allowed`
 **Description:** Fail if the data table contains any column not listed in the rules file.
-**Syntax & Example:**
+<br>**Syntax & Example:**
 ```
 no extra columns allowed
 ```
 
 #### `check column order`
 **Description:** Physical column order must match the order listed in the rules file.
-**Syntax & Example:**
+<br>**Syntax & Example:**
 ```
 check column order
 ```

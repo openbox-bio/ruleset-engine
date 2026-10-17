@@ -24,7 +24,7 @@ is unique
 
 ruleblock: [ "First_Name", "Last_Name", "City" ]
 description: "Name and location fields entered by hand.
-Must be present and at least three characters."
+Must be present and contain at least three characters."
 has value type string
 has min length 3
 is required

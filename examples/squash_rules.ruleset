@@ -1,9 +1,8 @@
-//Rules to validate squash_playsers.csv
-//In addition to value type these rules specify additional constraints.
+//Rules to validate squash_players_full.csv and squash_players_full_with_errors.csv.
 // Column ID should be unique, each value should start with 'PSA'; PSA0000 is not a valid value.
 // Column Country can have only one of the following values: 
 //'EGY', 'PER', 'NZL', 'IND', 'MAS', 'WAL', 'ENG', 'FRA', 'SUI'.
-//Column Year_of_Birth should have the format 'YYYY'
+//Column Year_of_Birth should have the format YYYY
 //Conditional rules:
 //Zip for Wales should start with 'NP'
 //Zip for Egypt should be 5 characters long.
@@ -14,42 +13,50 @@ all columns required
 no extra columns allowed
 
 column: 'Rank'
+description: "World ranking of the player. Must be a positive whole number."
 has value type integer
 is > 0
 
 column: 'PSA_ID'
+description: "Unique player identifier. Must start with PSA; PSA0000 is not a valid value."
 has value type string
 is unique
 starts with 'PSA'
 is not 'PSA0000'
 
 column: 'First_Name'
+description: "First name of the player."
 has value type string
 
 column: 'Last_Name'
+description: "Last name of the player."
 has value type string
 
 column: 'Country'
+description: "Three-letter country code of the player. Must be one of the nine codes listed."
 has value type string
 is in ['EGY', 'PER', 'NZL', 'IND', 'MAS', 'WAL', 'ENG', 'FRA', 'SUI']
 
 column: 'Year_of_Birth'
+description: "Four-digit year of birth, in YYYY format."
 has value type date-time
 has format YYYY
 
 column: 'Address'
+description: "Street address and city of the player."
 has value type string
 
 column: 'Zip_Code'
+description: "Postal code of the player's address. Must not be empty. Its type depends on Country; see the conditional rules below."
 is not null
 
-conditional rule: 'Country-Zip1'
+'Country-Zip1'
 if
 column: 'Country' is in ['WAL', 'ENG']
 then
 column: 'Zip_Code' has value type string
 
-conditional rule: 'Country-Zip2'
+'Country-Zip2'
 if
 column: 'Country' is not in ['WAL', 'ENG']
 then

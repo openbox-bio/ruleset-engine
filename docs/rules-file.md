@@ -5,24 +5,24 @@ A **rules file** is a plain-text file containing one or more RuleSet rules. It h
 ### Correct format
 
 - Lines starting with `//` are comments and are ignored; comments may appear anywhere in the file.
-- Every rules file must contain exactly one `column names in [ … ]` rule — this is the **only required rule** in RuleSet (see [Section 5.2](syntax/column-rules.md)).
-- Beyond that, rules are composed from the building blocks in [Section 5](syntax/index.md): **global settings, column rules, value rules, rule blocks, and conditional rules — combined in that order.**
-- Rule order does not affect the validation outcome (see Rule Stacking, [Section 1](index.md)).
+- Every rules file must contain exactly one `column names in [ … ]` rule — this is the **only required rule** in RuleSet (see [Column Rules](syntax/column-rules.md)).
+- Beyond that, rules are composed from the building blocks in [RuleSet Syntax](syntax/index.md): **global settings, column rules, value rules, rule blocks, and conditional rules — combined in that order.**
+- Rule order does not affect the validation outcome.
 
 ### Example
 
-Here's a complete, valid rules file. It validates a table of squash players: every column has a declared type, `PSA_ID` must be unique and start with `'PSA'`, `Country` must be one of nine listed values, and a conditional rule handles the fact that UK postal codes (Wales, England) are alphanumeric while other countries' zip codes are numeric.
+Here's a complete, valid rules file. It validates a table of squash players- `top15_squash_players_full.csv`.
+<br>Every column has a declared type, `PSA_ID` must be unique and start with `'PSA'`, `Country` must be one of nine listed values, and a conditional rule handles the fact that UK postal codes (Wales, England) are alphanumeric while other countries' zip codes are numeric. Both the rules file and data file can be found in the [examples](https://github.com/openbox-bio/ruleset-engine/tree/main/examples) folder.
 
 ```
-//Rules to validate top_15_squash_players.csv
-//Column ID should be unique; each value should start with 'PSA'; PSA0000 is not a valid value.
-//Column Country can have only one of the following values:
+//Rules to validate top15_squash_players_full.csv and top15_squash_players_full_with_errors.csv.
+// Column ID should be unique, each value should start with 'PSA'; PSA0000 is not a valid value.
+// Column Country can have only one of the following values: 
 //'EGY', 'PER', 'NZL', 'IND', 'MAS', 'WAL', 'ENG', 'FRA', 'SUI'.
-//Column Year_of_Birth should have the format 'YYYY'.
-//Column Zip_Code is not null.
+//Column Year_of_Birth should have the format YYYY
 //Conditional rules:
-//Zip_Code for Wales and England should be of type string.
-//Zip_Code for all other countries should be of type integer.
+//Zip for Wales should start with 'NP'
+//Zip for Egypt should be 5 characters long.
 //-------------------------------------
 
 column names in ['Rank', 'PSA_ID', 'First_Name', 'Last_Name', 'Country', 'Year_of_Birth', 'Address', 'Zip_Code']
@@ -67,19 +67,16 @@ column: 'Zip_Code'
 description: "Postal code of the player's address. Must not be empty. Its type depends on Country; see the conditional rules below."
 is not null
 
-"WalesEnglandZipCodeRule"
+'Country-Zip1'
 if
 column: 'Country' is in ['WAL', 'ENG']
 then
 column: 'Zip_Code' has value type string
 
-"NotWalesEnglandZipCodeRule"
+'Country-Zip2'
 if
 column: 'Country' is not in ['WAL', 'ENG']
 then
 column: 'Zip_Code' has value type integer
 ```
-
-This same example is referenced throughout [Section 5](syntax/index.md) when individual syntax features are explained.
-
 ---

@@ -1,4 +1,4 @@
-# ruleset-engine
+# RuleSet
 
 **A data validation language non-coders can read, write, and maintain.**
 
@@ -10,7 +10,8 @@
   remove it until then, or it'll render as a broken badge on the repo page.
 -->
 
-RuleSet is a data validation language that domain experts can use to develop, maintain, and communicate data validation rules — without writing code. `ruleset-engine` is the command-line tool that validates a data table against rules written in RuleSet.
+RuleSet is a data validation language that domain experts can use to develop, maintain, and communicate data validation rules — without writing code. RuleSet is designed to be easy to learn and use.
+<br>`ruleset-engine` is the command-line tool that validates a data table against rules written in RuleSet.
 
 ## Quick Start
 
@@ -49,7 +50,7 @@ ruleset-engine --rules-file <rules_file> --data-file <data_file.csv>
 
 `ruleset-engine` checks `data_file.csv` against every rule in `rules_file` and writes a timestamped log file reporting what passed and what didn't — no Python required to read or write the rules themselves.
 
-## Key Features
+## Key Features of RuleSet
 
 - **Atomic Rules** — each rule checks exactly one thing (presence, type, format, range, ...), so rules stay simple to read and debug in isolation.
 - **Rule Stacking** — apply multiple rules to a column; all must pass, and order doesn't affect the outcome.

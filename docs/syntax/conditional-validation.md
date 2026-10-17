@@ -19,6 +19,6 @@ column: 'zipcode' has pattern /^\d{5}(-\d{4})?$/
 column: 'state' in ['MD', 'NY', 'DE', 'VA']
 ```
 
-The worked example in [Section 3](../rules-file.md) uses two conditional rules together (`WalesEnglandZipCodeRule` and `NotWalesEnglandZipCodeRule`) to apply different `Zip_Code` type rules depending on `Country`.
+The worked example in [Section 3](../rules-file.md) uses two conditional rules together (`Country-Zip1` and `Country-Zip2`) to apply different `Zip_Code` type rules depending on `Country`.
 
 ---

@@ -1,7 +1,7 @@
 Rank,PSA_ID,First_Name,Last_Name,Country,Year_of_Birth,Address,Zip_Code
 1,9057,Mostafa,Asal,EGY,2001,"18 High St, Alexandria",11574
-2,PSA9086,Ali,Farag,EGY,Ali,"411 High St, Giza",11772
-3,PSA6447,Diego,Elias,PER,2004,"235 Oak Dr, Cusco",15441
+2,PSA9086,Ali,Farag,EGY,10-02-2004,"411 High St, Giza",11772
+3,PSA6447,Diego,Elias,,2004,"235 Oak Dr, Cusco",15441
 A4,PSA1932,Paul,Coll,NZL,1992,"99 Beach Rd, Auckland",1010
 5,PSA3884,Marwan,ElShorbagy,EGY,1993,"55 Nile Ave, Cairo",11311
 6,PSA7765,Tarek,Momen,EGY,1988,"12 Lotus St, Maadi",11431

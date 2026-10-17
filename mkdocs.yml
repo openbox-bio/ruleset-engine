@@ -4,7 +4,7 @@ repo_url: https://github.com/openbox-bio/ruleset-engine
 repo_name: openbox-bio/ruleset-engine
 
 theme:
-  name: material
+  name: readthedocs
   features:
     - navigation.sections
     - navigation.expand
@@ -31,6 +31,7 @@ nav:
       - Column Rules: syntax/column-rules.md
       - Value Rules: syntax/value-rules.md
       - Rule Blocks: syntax/rule-blocks.md
+      - Description: syntax/description.md
       - Conditional Validation: syntax/conditional-validation.md
       - The Log File: syntax/log-file.md
 

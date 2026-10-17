@@ -13,8 +13,8 @@ ruleset-engine --rules-file RULES_FILE --data-file DATA_FILE [--logfile-path LOG
 ```
 
 **Required Arguments:**
-- `--rules-file RULES_FILE` — Path to the file containing the data validation rules (see [Section 3](rules-file.md)).
-- `--data-file DATA_FILE` — Path to the data file to be validated (see [Section 4](data-file.md)).
+- `--rules-file RULES_FILE` — Path to the file containing the data validation rules (see [Rules File](rules-file.md)).
+- `--data-file DATA_FILE` — Path to the data file to be validated (see [Data File](data-file.md)).
 
 **Optional Arguments:**
 - `--logfile-path LOGFILE_PATH` — Directory path where the log file will be stored. If not specified, the current working directory is used.
@@ -23,7 +23,7 @@ ruleset-engine --rules-file RULES_FILE --data-file DATA_FILE [--logfile-path LOG
 **Notes:**
 - Ensure the `ruleset-engine` command is on your system's `PATH` (a standard `pip install` handles this automatically).
 - Logfile names include a timestamp: `YYYY_MM_DD_HH_MM_SS_ruleset.log`.
-- See [Section 5.6](syntax/log-file.md) for a full explanation of log output, with examples.
+- See [Log File](syntax/log-file.md) for a full explanation of log output, with examples.
 
 ### A minimal end-to-end example
 
