@@ -51,7 +51,8 @@ Info: Column: Zip_Code all OK.
 ```
 #### Example: a run with errors
 Let us introduce some errors into the `top15_squash_players_full.csv` file. We introduce the following errors:
-- **Row 1, `PSA_ID`:** `9057` does not start with `PSA`.
+
+- **Row 1, `PSA_ID`:** `9057` does not start with `PSA`. Also, `9057` will be parsed as an integer and not as a string.
 - **Row 2, `Year_of_Birth`:** `10-02-2004` is not in the required `YYYY` format.
 - **Row 3, `Country`:** the value is empty (null).
 - **Row 4, `Rank`:** `A4` is not an integer.

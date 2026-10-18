@@ -8,7 +8,7 @@ The **data file** is the actual table being validated against your rules file.
 
 ### Example data file
 
-The table below (`top_15_squash_players.csv`) is what the rules file in [Section 3](rules-file.md) validates against:
+The table below (`top_15_squash_players.csv`) is what the rules file in [Rules File](rules-file.md) validates against:
 
 | Rank | PSA_ID  | First_Name | Last_Name   | Country | Year_of_Birth | Address                         | Zip_Code |
 |------|---------|------------|-------------|---------|----------------|----------------------------------|----------|
@@ -28,13 +28,13 @@ The table below (`top_15_squash_players.csv`) is what the rules file in [Section
 | 14   | PSA9012 | Baptiste   | Masotti     | FRA     | 1995           | 12 Place du Marché, Marseille    | 13001    |
 | 15   | PSA8777 | Eain Yow   | Ng          | MAS     | 1998           | 38 Jalan Ampang, Kuala Lumpur    | 50450    |
 
-Running `ruleset-engine` with this data file against the rules file in [](rules-file.md) produces a clean log, since every row satisfies every rule — see [Section 5.6](syntax/log-file.md) for that output in full.
+Running `ruleset-engine` with this data file against the rules file produces a clean log, since every row satisfies every rule — see [Log File](syntax/log-file.md) for that output in full.
 <br> Both the rules file and data file can be found in the [examples](https://github.com/openbox-bio/ruleset-engine/tree/main/examples) folder.
 
 ### What happens if data file format is incorrect
 
 If `ruleset-engine` cannot read the data file at all — an unsupported file type, a corrupted file, or a path that doesn't resolve — it writes an error to the log file explaining what went wrong (e.g. `Error: could not read data file. <underlying error>`) and exits without attempting any validation. It does not partially validate a file it couldn't fully parse, and it never modifies or attempts to repair the data file itself.
 
-This is distinct from a data file that parses successfully but *fails* individual rules (a wrong value type, a null in a required column, and so on) — those are reported per-column as validation errors in the log, not as a file-format error. See [Section 5.6](syntax/log-file.md) for how each case is logged.
+This is distinct from a data file that parses successfully but *fails* individual rules (a wrong value type, a null in a required column, and so on) — those are reported per-column as validation errors in the log, not as a file-format error. See [Log File](syntax/log-file.md) for how each case is logged.
 
 ---

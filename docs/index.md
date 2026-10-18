@@ -1,4 +1,4 @@
-# Introduction and RuleSet Features
+# Introduction
 
 RuleSet is a data validation language that non-coding domain experts can use to develop, maintain, and communicate data validation rules. The accompanying data validation program, `ruleset-engine`, validates a data table against rules written in RuleSet.
 

@@ -25,7 +25,7 @@ thousands separator is "."
 ```
 
 #### `set tolerance at <NUMBER>`
-**Description:** Specify the tolerance level used for numeric comparisons. The default is `0.001` — two values are considered equal if they differ by no more than that. Setting tolerance at this level applies it globally to all numeric comparisons in the rules file. You can also specify tolerance for an individual comparison (see [Section 5.3](value-rules.md)); when both a global and a local tolerance are defined, the **local tolerance takes precedence**.
+**Description:** Specify the tolerance level used for numeric comparisons. The default is `0.001` — two values are considered equal if they differ by no more than that. Setting tolerance at this level applies it globally to all numeric comparisons in the rules file. You can also specify tolerance for an individual comparison (see [Value Rules](value-rules.md)); when both a global and a local tolerance are defined, the **local tolerance takes precedence**.
 **Syntax:**
 ```
 set tolerance at <tolerance level>

@@ -31,6 +31,6 @@ ruleset-engine --rules-file RULES_FILE --data-file DATA_FILE [--logfile-path LOG
 ruleset-engine --rules-file squash_rules.ruleset --data-file top_15_squash_players.csv
 ```
 
-The [Rules File](rules-file.md) and [Data File](data-file.md) pages build out exactly this `squash_rules.ruleset` / `top_15_squash_players.csv` pair in detail.
+The [Rules File](rules-file.md) and [Data File](data-file.md) pages build out exactly this `squash_rules.ruleset` / `top_15_squash_players.csv` pair in detail. Both files are available in the [examples](https://github.com/openbox-bio/ruleset-engine/tree/main/examples) folder of RuleSet.
 
 ---
