@@ -1,782 +1,141 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Value Rules - RuleSet Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Value Rules";
+        var mkdocs_page_input_path = "syntax/value-rules.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-        <meta name="description" content="ruleset-engine validates tabular data files against data validation rules written in the RuleSet language.">
-      
-      
-      
-      
-        <link rel="prev" href="../column-rules/">
-      
-      
-        <link rel="next" href="../rule-blocks/">
-      
-      
-        
-      
-      
-      <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
-    
-    
-      
-        <title>Value Rules - RuleSet Documentation</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
-      
-        
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
-      
-      
+<body class="wy-body-for-nav" role="document">
 
-
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
-
-    
-    
-  </head>
-  
-  
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#value-rules" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
-
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="RuleSet Documentation" class="md-header__button md-logo" aria-label="RuleSet Documentation" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
-            RuleSet Documentation
-          </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
-            
-              Value Rules
-            
-          </span>
-        </div>
-      </div>
-    </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-</form>
-      
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> RuleSet Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
 </div>
-      
-    
-    
-      <div class="md-header__source">
-        <a href="https://github.com/openbox-bio/ruleset-engine" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
-  </div>
-  <div class="md-source__repository">
-    openbox-bio/ruleset-engine
-  </div>
-</a>
       </div>
-    
-  </nav>
-  
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
 
-
-
-  
-
-<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="RuleSet Documentation" class="md-nav__button md-logo" aria-label="RuleSet Documentation" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
-    RuleSet Documentation
-  </label>
-  
-    <div class="md-nav__source">
-      <a href="https://github.com/openbox-bio/ruleset-engine" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
-  </div>
-  <div class="md-source__repository">
-    openbox-bio/ruleset-engine
-  </div>
-</a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Introduction
-  
-
-    
-  </span>
-  
-  
-
-      </a>
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../quick-start/">Quick Start</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../rules-file/">Rules File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../data-file/">Data File</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RuleSet Syntax</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../global-settings/">Global Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../column-rules/">Column Rules</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Value Rules</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#data-type-format">Data Type &amp; Format</a>
     </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../quick-start/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Quick Start
-  
-
-    
-  </span>
-  
-  
-
-      </a>
+    <li class="toctree-l2"><a class="reference internal" href="#presence-uniqueness">Presence &amp; Uniqueness</a>
     </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../rules-file/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Rules File
-  
-
-    
-  </span>
-  
-  
-
-      </a>
+    <li class="toctree-l2"><a class="reference internal" href="#pattern-membership">Pattern &amp; Membership</a>
     </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data-file/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Data File
-  
-
-    
-  </span>
-  
-  
-
-      </a>
+    <li class="toctree-l2"><a class="reference internal" href="#exact-value-comparisons">Exact Value Comparisons</a>
     </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    RuleSet Syntax
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    RuleSet Syntax
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-      </a>
+    <li class="toctree-l2"><a class="reference internal" href="#numeric-bounds">Numeric Bounds</a>
     </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../global-settings/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Global Settings
-  
-
-    
-  </span>
-  
-  
-
-      </a>
+    <li class="toctree-l2"><a class="reference internal" href="#length-constraints">Length Constraints</a>
     </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../column-rules/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Column Rules
-  
-
-    
-  </span>
-  
-  
-
-      </a>
+    <li class="toctree-l2"><a class="reference internal" href="#string-affixes-substrings">String Affixes &amp; Substrings</a>
     </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Value Rules
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Value Rules
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#data-type-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Data Type &amp; Format
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#presence-uniqueness" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Presence &amp; Uniqueness
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pattern-membership" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pattern &amp; Membership
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exact-value-comparisons" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Exact Value Comparisons
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#numeric-bounds" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Numeric Bounds
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#length-constraints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Length Constraints
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#string-affixes-substrings" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        String Affixes &amp; Substrings
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#precision-rules" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Precision Rules
-      
-    </span>
-  </a>
-  
-</li>
-      
+    <li class="toctree-l2"><a class="reference internal" href="#precision-rules">Precision Rules</a>
+    </li>
     </ul>
-  
-</nav>
-      
-    </li>
-  
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rule-blocks/">Rule Blocks</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../description/">Description</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../conditional-validation/">Conditional Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../log-file/">The Log File</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
 
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../rule-blocks/" class="md-nav__link">
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">RuleSet Documentation</a>
         
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Rule Blocks
-  
-
-    
-  </span>
-  
-  
-
-      </a>
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">RuleSet Syntax</li>
+      <li class="breadcrumb-item active">Value Rules</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/openbox-bio/ruleset-engine/edit/master/docs/syntax/value-rules.md">Edit on openbox-bio/ruleset-engine</a>
     </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../conditional-validation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Conditional Validation
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../log-file/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    The Log File
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
   </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-          
-          
-            <div class="md-content" data-md-component="content">
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
               
-              <article class="md-content__inner md-typeset">
-                
-                  
-
-
-  
-  
-
-
-<h1 id="value-rules">Value Rules<a class="headerlink" href="#value-rules" title="Permanent link">&para;</a></h1>
-<p>Apply one or more value-level constraints to a specific column.</p>
+                <h1 id="value-rules">Value Rules<a class="headerlink" href="#value-rules" title="Permanent link">&para;</a></h1>
+<p>Value rules are the building blocks of a RuleSet data quality schema. Each rule checks exactly one property of a column's values, and you combine rules to describe what valid data looks like for that column. A few ideas shape how they work:</p>
+<ul>
+<li><strong>One rule, one check.</strong> Rules are atomic. <code>is unique</code> checks only uniqueness and <code>has value type integer</code> checks only the type. A rule never checks anything you didn't ask for, so each rule is easy to read, and a failure points to one clear cause.</li>
+<li><strong>Stack rules to build up a schema.</strong> A column can have as many rules as you need, and every rule must pass for the column to be valid. Rules are evaluated independently, so their order does not matter.</li>
+<li><strong>Develop the schema iteratively.</strong> Start with the checks you are sure about, often just a value type for each column. Run <code>ruleset-engine</code>, review the <a href="../log-file/">log file</a>, and add rules as you learn more about the data. Columns that are listed in <code>column names in [ … ]</code> but have no value rules yet are flagged with a warning in the log, which gives you a running list of what is still unchecked.</li>
+<li><strong>Change stringency one line at a time.</strong> To tighten a schema, add a rule. To loosen it, delete one. Because rules don't depend on each other, the rest of the schema is unaffected, and the same rules file can grow from a quick first-pass check into a strict specification.</li>
+<li><strong>Nothing is implicit.</strong> Data is only checked by the rules you write, and it is never modified.</li>
+</ul>
+<p>For example, a first pass at a <code>Rank</code> column might only confirm the type:</p>
+<pre><code>column: 'Rank'
+has value type integer
+</code></pre>
+<p>Once you know the values should also be positive, add one line:</p>
+<pre><code>column: 'Rank'
+has value type integer
+is &gt; 0
+</code></pre>
+<p>To apply the same rules to several columns, use <a href="../rule-blocks/">rule blocks</a>. To apply rules only when another column has a particular value, use <a href="../conditional-validation/">conditional validation</a>.</p>
 <p><strong>Block Syntax:</strong></p>
 <pre><code>column: &lt;ColumnName&gt;
 &lt;ValueRule1&gt;
@@ -833,15 +192,14 @@ is &lt;= 120
 </tbody>
 </table>
 <p><strong><code>has format &lt;FormatType&gt;</code></strong></p>
-<pre><code>has format &quot;YYYY-MM-DD&quot;
+<pre><code>has format YYYY-MM-DD
 </code></pre>
 <p>Applies only to the <code>date-time</code> type. Supported date-time formats:</p>
-<pre><code>[&quot;HH:mm:ss&quot;, &quot;HH:mm&quot;, &quot;hh:mm:ss AM/PM&quot;, &quot;hh:mm AM/PM&quot;, &quot;HHmmss&quot;, &quot;YYYY-MM-DD HH:mm:ss&quot;,
-&quot;YYYY-MM-DDTHH:mm:ss&quot;, &quot;YYYY-MM-DD HH:mm&quot;, &quot;YYYY-MM-DDTHH:mm&quot;, &quot;DD/MM/YYYY HH:mm:ss&quot;,
-&quot;MM-DD-YYYY hh:mm:ss AM/PM&quot;, &quot;YYYY/MM/DD HH:mm:ss&quot;, &quot;YYYY-MM-DDTHH:mm:ss.sssZ&quot;,
-&quot;YYYY-MM-DDTHH:mm:ss+hh:mm&quot;, &quot;YYYY-MM-DD&quot;, &quot;MM-DD-YYYY&quot;, &quot;DD-MM-YYYY&quot;, &quot;YYYY/MM/DD&quot;,
-&quot;MM/DD/YYYY&quot;, &quot;DD/MM/YYYY&quot;, &quot;YYYY.MM.DD&quot;, &quot;MM.DD.YYYY&quot;, &quot;DD.MM.YYYY&quot;, &quot;YYYYMMDD&quot;, &quot;YYYY&quot;]
-</code></pre>
+<p>[<code>HH:mm:ss</code>, <code>HH:mm</code>, <code>hh:mm:ss AM/PM</code>, <code>hh:mm AM/PM</code>, <code>HHmmss</code>, <code>YYYY-MM-DD HH:mm:ss</code>,
+<code>YYYY-MM-DDTHH:mm:ss</code>, <code>YYYY-MM-DD HH:mm</code>, <code>YYYY-MM-DDTHH:mm</code>, <code>DD/MM/YYYY HH:mm:ss</code>,
+<code>MM-DD-YYYY hh:mm:ss AM/PM</code>, <code>YYYY/MM/DD HH:mm:ss</code>, <code>YYYY-MM-DDTHH:mm:ss.sssZ</code>,
+<code>YYYY-MM-DDTHH:mm:ss+hh:mm</code>, <code>YYYY-MM-DD</code>, <code>MM-DD-YYYY</code>, <code>DD-MM-YYYY</code>, <code>YYYY/MM/DD</code>,
+<code>MM/DD/YYYY</code>, <code>DD/MM/YYYY</code>, <code>YYYY.MM.DD</code>, <code>MM.DD.YYYY</code>, <code>DD.MM.YYYY</code>, <code>YYYYMMDD</code>, <code>YYYY</code>]</p>
 <p><em>Other formats for geolocation and currency data will be added in future.</em></p>
 <h4 id="presence-uniqueness">Presence &amp; Uniqueness<a class="headerlink" href="#presence-uniqueness" title="Permanent link">&para;</a></h4>
 <p><strong><code>is required</code></strong></p>
@@ -880,7 +238,7 @@ is &lt; 100
 <pre><code>is &gt;= 0
 is &lt;= 120
 </code></pre>
-<p><strong>Local tolerance:</strong> <code>is ==</code>, <code>is !=</code>, and the bound comparisons above respect tolerance (see <a href="../global-settings/">Section 5.1</a> for how tolerance works). You can set a tolerance local to one column's comparisons, which takes precedence over any global tolerance:</p>
+<p><strong>Local tolerance:</strong> <code>is ==</code>, <code>is !=</code>, and the bound comparisons above respect tolerance (see <a href="../global-settings/">Global Settings</a> for how tolerance works). You can set a tolerance local to one column's comparisons, which takes precedence over any specified global tolerance:</p>
 <pre><code>set tolerance at 0.0000001
 set tolerance at 1E-06
 </code></pre>
@@ -909,60 +267,55 @@ does not include &quot;spam&quot;
 <pre><code>has 2 decimal places
 </code></pre>
 <hr />
-
-
-
-
-
-
-
-
-
-
-
-
-                
-              </article>
+              
             </div>
-          
-          
-<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
-</div>
-      
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../column-rules/" class="btn btn-neutral float-left" title="Column Rules"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../rule-blocks/" class="btn btn-neutral float-right" title="Rule Blocks">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
   </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/openbox-bio/ruleset-engine" class="fa fa-code-fork" style="color: #fcfcfc"> openbox-bio/ruleset-engine</a>
+        </span>
     
     
-    
-      
-      
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "toc.integrate", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <span><a href="../column-rules/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
+      <span><a href="../rule-blocks/" style="color: #fcfcfc">Next &raquo;</a></span>
     
-  </body>
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
 </html>
