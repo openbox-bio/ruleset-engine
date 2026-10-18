@@ -59,7 +59,7 @@ ruleset-engine --rules-file <rules_file> --data-file <data_file.csv>
 - **No implicit evaluation** — nothing is checked unless a rule explicitly says so.
 - **No data modification** — validation never changes your data, ever.
 
-See the [`RuleSet Usage Guide`](https://github.com/openbox-bio/ruleset-engine/tree/main/docs/RuleSet_DSL_Full.md) for the complete language reference, including all supported value types, date/time formats, and a full worked example.
+See the [`RuleSet Usage Guide`](https://openbox-bio.github.io/ruleset-engine/) for the complete language reference, including all supported value types, date/time formats, and a full worked example.
 
 ## Why RuleSet?
 
