@@ -102,7 +102,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="conditional-validation">Conditional Validation<a class="headerlink" href="#conditional-validation" title="Permanent link">&para;</a></h1>
-<p>Apply a rule only when a condition (<code>if</code>) is met. The consequent (<code>then</code>) can include multiple atomic rules, each applied to a separate column. Multiple <code>if</code>/<code>then</code> rules can be specified in one rules file. Each conditional rule needs a rule tag (a quoted string identifying it).</p>
+<p>Apply a rule only when a condition (<code>if</code>) is met. The <code>if</code> condition is a single column with a single atomic rule. The consequent (<code>then</code>) can include multiple columns, but each column can have only one atomic rule. Multiple <code>if</code>/<code>then</code> rules can be specified in one rules file. Each conditional rule needs a rule tag (a quoted string identifying it).</p>
 <p><strong>Syntax:</strong></p>
 <pre><code>&lt;Rule Tag&gt; if
 column: &lt;ColumnA&gt; &lt;ValueRuleA&gt;
@@ -115,9 +115,25 @@ column: &lt;ColumnC&gt; &lt;ValueRuleC&gt;
 column: 'country' is &quot;USA&quot;
 then
 column: 'zipcode' has pattern /^\d{5}(-\d{4})?$/
-column: 'state' in ['MD', 'NY', 'DE', 'VA']
+column: 'state' is in ['MD', 'NY', 'DE', 'VA']
 </code></pre>
-<p>The worked example in <a href="../../rules-file/">Section 3</a> uses two conditional rules together (<code>Country-Zip1</code> and <code>Country-Zip2</code>) to apply different <code>Zip_Code</code> type rules depending on <code>Country</code>.</p>
+<p><strong>One rule per column:</strong> Each column in the consequent takes exactly one atomic rule. A column block with two or more rules is not valid in a conditional rule:</p>
+<pre><code>then
+column: 'zipcode' is not null
+has value type string
+</code></pre>
+<p>To require several rules on the same column, write a separate conditional rule for each one and repeat the <code>if</code> condition:</p>
+<pre><code>'ZipRequired' if
+column: 'country' is &quot;USA&quot;
+then
+column: 'zipcode' is not null
+
+'ZipIsString' if
+column: 'country' is &quot;USA&quot;
+then
+column: 'zipcode' has value type string
+</code></pre>
+<p>The worked example in <a href="../../rules-file/">Rules File</a> uses two conditional rules together (<code>Country-Zip1</code> and <code>Country-Zip2</code>) to apply different <code>Zip_Code</code> type rules depending on <code>Country</code>.</p>
 <hr />
               
             </div>
