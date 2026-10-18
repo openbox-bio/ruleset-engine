@@ -323,7 +323,7 @@ def validate_rule(df, input_column_name, input_rule, input_set_value_rules, inpu
 	local_rules_dict = {type(local_rule).__name__: local_rule for local_rule in set_local_rules_list}
 	
 	if len(valuerules_list) > 1:
-		ruleset_message = f'Conditional rule is invalid. Only one atomic rule per column is allowed.'
+		ruleset_message = f'Error: Conditional rule is invalid. Only one atomic rule per column is allowed.'
 		return ruleset_message
 	else:
 		value_rule = valuerules_list[0]
@@ -364,7 +364,7 @@ def validate_conditional_rules():
 		#if there is more than one antecedent atomic rule, validate_rule sends an error message. 
 		#ruleset-engine logs this error message and moves to the next conditional rule.
 		if(type(if_ruleset_message) == str):
-			LOGFILE.write(if_ruleset_message)
+			LOGFILE.write(f"Error: Conditional rule {rule_tag}, column {if_column_name}: {if_ruleset_message}\n")
 			continue
 		if_is_true = {k:v for k,v in if_ruleset_message.items() if v is True}
 		if not if_is_true:
@@ -374,6 +374,9 @@ def validate_conditional_rules():
 		for then_rule in then_rule_list:
 			then_column_name = then_rule.column_name.name
 			then_ruleset_message = validate_rule(df = data_df, input_column_name = then_column_name , input_rule = then_rule, input_set_value_rules = set_value_rules_dict, input_column_rules = column_rules_dict, input_column_value_rules = column_value_rules_dict) 
+			if isinstance(then_ruleset_message, str):
+				LOGFILE.write(f"Error: Conditional rule {rule_tag}, column {then_column_name}: {then_ruleset_message}\n")
+				continue
 			then_is_true = {k:v for k,v in then_ruleset_message.items() if v is True}
 			if_then_match = set(if_is_true.keys()).issubset(then_is_true.keys())
 			if if_then_match:
